@@ -1,98 +1,100 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="card">
-        <div class="card-header card-header-danger">
-            <h4 class="card-title">Material Dashboard Heading</h4>
+        <div class="card-header card-header-danger" >
+            <h4 class="card-title">Training Management</h4>
             <p class="card-category">Created using Roboto Font Family</p>
         </div>
+        <div class="border">
+            <button class="btn btn-md btn-outline-primary"  (click)="open(content)">
+                <i class="fa fa-user"></i>New Training</button>
+        </div>
         <div class="card-body">
-            <div id="typography">
-                <div class="card-title">
-                    <h2>Training</h2>
-                </div>
-                <div class="row">
-                    <div class="tim-typo">
-                        <h1>
-                            <span class="tim-note">Header 1</span>The Life of Material Dashboard </h1>
-                    </div>
-                    <div class="tim-typo">
-                        <h2>
-                            <span class="tim-note">Header 2</span>The Life of Material Dashboard</h2>
-                    </div>
-                    <div class="tim-typo">
-                        <h3>
-                            <span class="tim-note">Header 3</span>The Life of Material Dashboard</h3>
-                    </div>
-                    <div class="tim-typo">
-                        <h4>
-                            <span class="tim-note">Header 4</span>The Life of Material Dashboard</h4>
-                    </div>
-                    <div class="tim-typo">
-                        <h5>
-                            <span class="tim-note">Header 5</span>The Life of Material Dashboard</h5>
-                    </div>
-                    <div class="tim-typo">
-                        <h6>
-                            <span class="tim-note">Header 6</span>The Life of Material Dashboard</h6>
-                    </div>
-                    <div class="tim-typo">
-                        <p>
-                            <span class="tim-note">Paragraph</span>
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Quote</span>
-                        <blockquote class="blockquote">
-                            <p>
-                                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.
-                            </p>
-                            <small>
-                                Kanye West, Musician
-                            </small>
-                        </blockquote>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Muted Text</span>
-                        <p class="text-muted">
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
-                        </p>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Primary Text</span>
-                        <p class="text-primary">
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Info Text</span>
-                        <p class="text-info">
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Success Text</span>
-                        <p class="text-success">
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Warning Text</span>
-                        <p class="text-warning">
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
-                        </p>
-                    </div>
-                    <div class="tim-typo">
-                        <span class="tim-note">Danger Text</span>
-                        <p class="text-danger">
-                            I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
-                    </div>
-                    <div class="tim-typo">
-                        <h2>
-                            <span class="tim-note">Small Tag</span>
-                            Header with small subtitle
-                            <br>
-                            <small>Use "small" tag for the headers</small>
-                        </h2>
-                    </div>
-                </div>
+            <div class="container">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tile</th>
+                        <th>Description</th>
+                        <th>Stars</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Availablity</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let training of Trainings">
+                        <td><span>{{training.id}}</span></td>
+                        <td><span>{{training.title}}</span></td>
+                        <td><span>{{training.description}}</span></td>
+                        <td><span>{{training.stars}}</span></td>
+                        <td><span>{{training.startDate}}</span></td>
+                        <td><span>{{training.endDate}}</span></td>
+                        <td><span>{{training.availablity}}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info">
+                                <i class="fa fa-search"></i>Details</button>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="fa fa-edit"></i>Edit</button>
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fa fa-remove"></i>Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
 </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Training</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <div class="input-group">
+                    <input id="title" class="form-control" name="title" ngModel required #title="ngModel">
+                </div>
+                <label for="domain">Domain</label>
+                <div class="input-group">
+                    <input id="domain" class="form-control" name="domain" ngModel required #domain="ngModel">
+                </div>
+                <label for="description">Description</label>
+                <div class="input-group">
+                    <input id="description" class="form-control" name="description" ngModel required #description="ngModel">
+                </div>
+                <label for="availablity">Availablity</label>
+                <div class="input-group">
+                    <input id="availablity" class="form-control" name="availablity" ngModel required #availablity="ngModel">
+                </div>
+                <label for="startdate">Start date</label>
+                <div class="input-group">
+                    <input id="startDate" class="form-control" placeholder="yyyy-mm-dd" name="startDate" ngModel required ngbDatepicker #startDate="ngbDatepicker"  >
+                    <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"></button>
+                </div>
+                <label for="endDate">End date</label>
+                <div class="input-group">
+                    <input id="endDate" class="form-control" placeholder="yyyy-mm-dd" name="endDate" ngModel required ngbDatepicker #endDate="ngbDatepicker" >
+                    <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"></button>
+                </div>
+            </div>
+            </div>
+            <div class="border text-center">
+                <button data-dismiss="modal" class="btn btn-info">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

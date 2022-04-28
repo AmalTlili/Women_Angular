@@ -34,10 +34,10 @@
                         <td><span>{{training.endDate}}</span></td>
                         <td><span>{{training.availablity}}</span></td>
                         <td>
-                            <button class="btn btn-sm btn-info">
+                            <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, training)">
                                 <i class="fa fa-search"></i>Details</button>
                             <button class="btn btn-sm btn-warning">
-                                <i class="fa fa-edit"></i>Edit</button>
+                                <i class="fa fa-edit" (click)="openEdit(contentEdit, training)"></i>Edit</button>
                             <button class="btn btn-sm btn-danger">
                                 <i class="fa fa-remove"></i>Delete</button>
                         </td>
@@ -96,5 +96,98 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2">Edit Training</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editForm" novalidate>
+            <div class="mb-3">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="title">
+                    </div>
+                    <label for="domain">Domain</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="domain">
+                    </div>
+                    <label for="description">Description</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="description">
+                    </div>
+                    <label for="availablity">Availablity</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="availablity">
+                    </div>
+                    <label for="startdate">Start date</label>
+                    <div class="input-group">
+                        <input  class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate" ngModel required ngbDatepicker #startDate="ngbDatepicker"  >
+                        <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"></button>
+                    </div>
+                    <label for="endDate">End date</label>
+                    <div class="input-group">
+                        <input  class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngModel required ngbDatepicker #endDate="ngbDatepicker" >
+                        <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="border text-center">
+                <button data-dismiss="modal" class="btn btn-info">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #contentDetails let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title1">Training details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div class="mb-3">
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="input-group">
+                        <input id="title1" class="form-control" readonly>
+                    </div>
+                    <label>Domain</label>
+                    <div class="input-group">
+                        <input id="domain1" class="form-control" readonly>
+                    </div>
+                    <label>Description</label>
+                    <div class="input-group">
+                        <input id="description1" class="form-control" readonly>
+                    </div>
+                    <label>Availablity</label>
+                    <div class="input-group">
+                        <input id="availablity1" class="form-control" readonly>
+                    </div>
+                    <label>Start date</label>
+                    <div class="input-group">
+                        <input id="startDate1" class="form-control" placeholder="yyyy-mm-dd" readonly>
+                    </div>
+                    <label>End date</label>
+                    <div class="input-group">
+                        <input id="endDate1" class="form-control" placeholder="yyyy-mm-dd" readonly>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
     </div>
 </ng-template>

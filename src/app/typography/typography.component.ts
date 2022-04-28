@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
 
 
 export class Training {
@@ -25,7 +25,8 @@ export class Training {
 export class TypographyComponent implements OnInit {
   Trainings: Training[];
   closeResult: string;
-  constructor(private httpClient: HttpClient, private modalService: NgbModal
+  editForm: FormGroup;
+  constructor(private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder
   ) {
   }
   getTrainings() {
@@ -74,8 +75,45 @@ export class TypographyComponent implements OnInit {
         });
     this.modalService.dismissAll();
   }
+  openDetails(targetModal, training: Training) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static',
+      size: 'lg'
+    });
+    document.getElementById('domain1').setAttribute('value', training.domain);
+    document.getElementById('title1').setAttribute('value', training.title);
+    document.getElementById('description1').setAttribute('value', training.description);
+    // document.getElementById('email2').setAttribute('value', String(training.stars));
+    document.getElementById('startDate1').setAttribute('value', String( training.startDate));
+    document.getElementById('endDate1').setAttribute('value',  String(training.endDate));
+    document.getElementById('availablity1').setAttribute('value', training.availablity);
+
+  }
+  openEdit(targetModal, training: Training) {
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
+    });
+    this.editForm.patchValue( {
+      domain: training.domain,
+      title: training.title,
+      description: training.description,
+      startDate: training.startDate,
+      endDate: training.endDate,
+      availablity : training.availablity
+    });
+  }
   ngOnInit() {
     this.getTrainings();
+    this.editForm = this.fb.group({
+      id: [''],
+      firstname: [''],
+      lastname: [''],
+      department: [''],
+      email: [''],
+      country: ['']
+    } );
   }
 
 }

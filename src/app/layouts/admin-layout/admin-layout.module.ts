@@ -17,6 +17,11 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import { MoneypotService } from 'app/moneypot.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { MoneypotComponent } from 'app/moneypot/moneypot.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -30,6 +35,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    NgbModule
   ],
   declarations: [
     DashboardComponent,
@@ -37,9 +43,9 @@ import {MatSelectModule} from '@angular/material/select';
     TableListComponent,
     TypographyComponent,
     IconsComponent,
-    MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    MoneypotComponent,
   ]
 })
 

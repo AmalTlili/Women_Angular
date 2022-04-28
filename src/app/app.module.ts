@@ -7,13 +7,14 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { MoneypotService } from './moneypot.service';
 
 @NgModule({
   imports: [
+    HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
@@ -21,9 +22,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

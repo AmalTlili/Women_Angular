@@ -1,0 +1,202 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">MoneyPot</h4>
+                        <p class="card-category">liste des MoneyPot</p>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                   
+                    <div class="input-group">
+                        <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                            <i class="material-icons">search</i>
+                            <div class="ripple-container"></div>
+
+                          
+
+                        </button>
+                        <!-- <button type="button" class=" btn  btn-sm btn-success"  [routerLink]="['/facture/addfacture']"> <i class="fa fa-plus"></i>  Ajouter</button> <br> -->
+                    </div>
+                    <div class="card-body">
+
+                        <div class="border">
+                            <button class="btn btn-md btn-outline-primary" (click)="open(new)" >
+                              <i class="fa fa-user ml-2"></i>New MoneyPot</button>
+                          </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table">
+                                <thead class=" text-primary">
+                                  
+                                     <th>
+                                        Duration
+                                     </th> 
+                                    <th>
+                                        Bank details
+                                    </th>
+                                    <th>
+                                        Final Amount
+                                    </th>
+                                    <th>
+                                        Data
+                                    </th>
+                                    <th>
+                                        Name File
+                                    </th>
+                                    <th>
+                                        File
+                                    </th>
+                                    <th>
+                                         Targeted Amount
+                                     </th> 
+                                  <th>
+                                      IDM
+                                  </th>
+                                  
+                                  
+                                </thead>
+                                <tbody> 
+                                   
+                                     <tr *ngFor="let u of list"> 
+                                         <td>{{u.duration | date:'dd/MM/yyyy'}}</td>
+                                         <td>{{u.bankDetails}}</td>
+                                         <td>{{u.finalAmount}}</td> 
+                                         <td>{{u.data}}</td>  
+                                         <td>{{u.nameFile}}</td> 
+                                         <td>{{u.files}}</td> 
+                                         <td>{{u.targetedAmount}}</td>
+                                        <td>{{ u.idM}}</td> 
+                                       
+                                           
+                                    
+                                         
+                                      
+                                        <!-- <button type="button" class="btn btn-outline-primary" (click)="openSweetalert(u.idM)">edit</button> -->
+                                         
+                                    
+                                        <td>
+                                            
+                                            <button class="btn btn-sm btn-warning"  (click)="open(edit,u)">
+                                              <i class="fa fa-edit"></i>Edit</button>
+                                            <button class="btn btn-sm btn-danger" (click)="deleteMoneyPot(u.idM)">
+                                              <i class="fa fa-remove"></i>Delete</button>
+                                          </td>
+                                    </tr>
+                               
+                                </tbody>
+                            </table>
+                        
+                 
+                        </div>
+                    </div>
+                </div>
+               
+                
+   
+                     
+                <ng-template #new let-modal style="z-index: 0 !important;">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">New MoneyPot</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="bankDetails">Bank Details:</label>
+                                <div class="col-sm-10">
+                                   <input type="text" class="form-control" ngModel id="bankDetails" name="bankDetails"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                for="bankDetails">Duration:</label>
+                             <div class="col-sm-duration">
+                                <input type="text" class="form-control" ngModel id="duration" name="duration" />
+                             </div>
+                             <label class="col-sm-2 control-label text-nowrap"
+                             for="finalAmount">Final Amount</label>
+                          <div class="col-sm-10">
+                             <input type="text" class="form-control" ngModel id="finalAmount" name="finalAmount" />
+                          </div>
+                          <label class="col-sm-2 control-label text-nowrap"
+                          for="targetedAmount">Targeted Amount</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control" ngModel id="targetedAmount" name="targetedAmount" />
+                       </div>
+                      
+                    </div>
+                    <div class="border text-center">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
+
+                        </div>
+
+                    
+
+                      </form>
+                    </div>
+                   
+                  </ng-template>   
+
+                  <ng-template #edit let-modal style="z-index: 0 !important;">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Edit MoneyPot</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #fEdit="ngForm" (ngSubmit)="onSubmitEdit(fEdit)" novalidate>
+                            <div class="form-group">
+                                <div hidden>
+                                    <label class="col-sm-2 control-label text-nowrap"
+                                    for="idM">idMt</label>
+                                 <div class="col-sm-10">
+                                    <input type="text" class="form-control"  id="idM" [(ngModel)]="moneypot.idM" name="idM" />
+                                 </div>
+                                </div>
+                              
+
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="bankDetails">Bank Details:</label>
+                                <div class="col-sm-10">
+                                   <input type="text"  class="form-control" [(ngModel)]="moneypot.bankDetails" id="bankDetails" name="bankDetails"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                for="bankDetails">Duration:</label>
+                             <div class="col-sm-duration">
+                                <input type="text" class="form-control" [(ngModel)]="moneypot.duration" id="duration" name="duration" />
+                             </div>
+                             <label class="col-sm-2 control-label text-nowrap"
+                             for="finalAmount">Final Amount</label>
+                          <div class="col-sm-10">
+                             <input type="text" class="form-control"  id="finalAmount" [(ngModel)]="moneypot.finalAmount" name="finalAmount" />
+                          </div>
+                          <label class="col-sm-2 control-label text-nowrap"
+                          for="targetedAmount">Targeted Amount</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control"  id="targetedAmount" name="targetedAmount" [(ngModel)]="moneypot.targetedAmount"/>
+                       </div>
+                      
+                    </div>
+                    <div class="border text-center">
+                        <button type="submit" class="btn btn-info">Save</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
+
+                        </div>
+
+                    
+
+                      </form>
+                    </div>
+                   
+                  </ng-template>   
+
+                </div>
+ 
+ 

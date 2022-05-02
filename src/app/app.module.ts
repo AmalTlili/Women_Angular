@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
+    AddPostComponent,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

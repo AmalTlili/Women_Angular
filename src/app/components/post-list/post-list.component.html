@@ -1,0 +1,83 @@
+
+    <div class="list-group list-group-flush">
+            <div class="col-md-8">
+                <div class="input-group mb-3">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                           
+                        <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search by topic"
+                        (ngModel)="topic"
+                        />
+                        </div>
+                    <div class="input-group-append">
+                        <button
+                        class="btn btn-warning"
+                        type="button"
+                        (click)="searchTopic()"
+                        >Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Name File</th>
+                    <th scope="col">Topic</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Types File </th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let post of post">
+                    <th scope="row">{{post.id}}</th>
+                    <td>{{post.data}}</td>
+                    <td>{{post.date}}</td>
+                    <td>{{post.name_file}}</td>
+                    <td>{{post.topic}}</td>
+                    <td>{{post.type}}</td>
+                    <td>{{post.types}}</td>
+                    <!-- <td>   
+                        <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPost()">Remove</button>
+                    </td>  -->
+                    <td>
+                        <button class="btn btn-sm btn-info">
+                          <i class="fa fa-search"></i>Details</button>
+                        <button class="btn btn-sm btn-warning">
+                          <i class="fa fa-edit" (click)="updatePost()"></i>Edit</button>
+                        <button class="btn btn-sm btn-danger">
+                          <i class="fa fa-remove" (click)="removeAllPost()"></i>Delete</button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            <div class="col-md-6">
+                <!-- <h4>Post List </h4>  -->
+                <!-- <ul class="list-group">
+                    <li
+                        class="list-group-item"
+                        *ngFor="let post of post; let i = index"
+                        [class.active]="i == currentIndex"
+                        (click)="setActivePost(post, i)">
+                        {{post.topic}}
+                    </li> 
+                </ul> -->
+                <app-post-details
+                    [viewMode]="true"
+                    [currentPost]="currentPost">
+                </app-post-details>
+
+            </div>
+     </div>

@@ -1,0 +1,134 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentPost.id">
+      <h4>Post</h4>
+      <div>
+        <label><strong>Data:</strong></label> {{ currentPost.data }}
+      </div>
+      <div>
+        <label><strong>Date:</strong></label>
+        {{ currentPost.date }}
+      </div>
+      <div>
+        <label><strong>Name_file:</strong></label>
+        {{ currentPost.name_file  }}
+      </div>
+      <div>
+        <label><strong>Topic:</strong></label>
+        {{ currentPost.topic  }}
+      </div>
+      <div>
+        <label><strong>Type:</strong></label>
+        {{ currentPost.type  }}
+      </div>
+      <div>
+        <label><strong>Types:</strong></label>
+        {{ currentPost.types  }}
+      </div>
+      <a
+        class="badge badge-warning"
+        routerLink="/post/{{ currentPost.id }}"
+      >
+        Edit
+      </a>
+    </div>
+    <div *ngIf="!currentPost">
+      <br />
+      <p>Please click on a Post...</p>
+    </div>
+  </div>
+  <ng-template #editable>
+    <div *ngIf="currentPost.id" class="edit-form">
+      <h4>Post</h4>
+      <form>
+        <div class="form-group">
+          <label for="data">Data</label>
+          <input
+            type="text"
+            class="form-control"
+            id="data"
+            [(ngModel)]="currentPost.data"
+            name="data"
+          />
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input
+            type="text"
+            class="form-control"
+            id="date"
+            [(ngModel)]="currentPost.date"
+            name="date"
+          />
+        </div>
+        <div class="form-group">
+            <label for="name_file">Name_file</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name_file"
+              [(ngModel)]="currentPost.name_file"
+              name="name_file"
+            />
+          </div>
+          <div class="form-group">
+            <label for="topic">Topic</label>
+            <input
+              type="text"
+              class="form-control"
+              id="topic"
+              [(ngModel)]="currentPost.topic"
+              name="topic"
+            />
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              [(ngModel)]="currentPost.type"
+              name="type"
+            />
+          </div>
+          <div class="form-group">
+            <label for="types">Types</label>
+            <input
+              type="text"
+              class="form-control"
+              id="types"
+              [(ngModel)]="currentPost.types"
+              name="types"
+            />
+          </div>
+      </form>
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentPost.button"
+        (click)="updatePublished(false)"
+      >
+        UnPublish
+      </button>
+      <button
+        *ngIf="!currentPost.button"
+        class="badge badge-primary mr-2"
+        (click)="updatePublished(true)"
+      >
+        Publish
+      </button>
+      <button class="badge badge-danger mr-2" (click)="deletePost()">
+        Delete
+      </button>
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updatePost()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+    <div *ngIf="!currentPost.id">
+      <br />
+      <p>Cannot access this Post...</p>
+    </div>
+  </ng-template>

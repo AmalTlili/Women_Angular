@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/table-list', title: 'MoneyPot',  icon:'content_paste', class: '' },
     { path: '/typography', title: 'Training',  icon:'library_books', class: '' },
     { path: '/icons', title: 'Help area',  icon:'bubble_chart', class: '' },
-    { path: '/maps', title: 'Jobs',  icon:'location_on', class: '' },
+    { path: '/job', title: 'Jobs',  icon:'work ', class: '' },
     { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
     { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
 ];

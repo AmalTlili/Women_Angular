@@ -13,6 +13,9 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "paths":{
+      "crypto":["node_modules/crypto-js"]
+    },
     "lib": [
       "es2017",
       "dom"

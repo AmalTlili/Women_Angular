@@ -22,6 +22,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MoneypotComponent } from 'app/moneypot/moneypot.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { EventsComponent } from 'app/events/events.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import { EventsCalendarComponent } from 'app/events-calendar/events-calendar.component';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
+
 
 @NgModule({
   imports: [
@@ -35,7 +48,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
-    NgbModule
+    NgbModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
+    FullCalendarModule 
+    
   ],
   declarations: [
     DashboardComponent,
@@ -46,6 +63,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NotificationsComponent,
     UpgradeComponent,
     MoneypotComponent,
+    EventsComponent,
+    UserProfileComponent,
+    EventsCalendarComponent
   ]
 })
 

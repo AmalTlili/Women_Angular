@@ -1,3 +1,4 @@
+
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -5,8 +6,8 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">MoneyPot</h4>
-                        <p class="card-category">liste des MoneyPot</p>
+                        <h4 class="card-title ">Event</h4>
+                        <p class="card-category">liste des Event</p>
                     </div>
                     <div>
                         <br>
@@ -14,7 +15,7 @@
                    
               
                         <div class="input-group">
-                            <input type="text" class="form-control" style="width: 50px!important;" placeholder="    Rechercher..." name="bankDetails" [(ngModel)] = "bankDetails" (ngModelChange)="Search()" >
+                            <input type="text" class="form-control" style="width: 50px!important;" placeholder="    Rechercher..." name="location" [(ngModel)] = "location" (ngModelChange)="Search()" >
                             <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
                                 <i class="material-icons">search</i>
                                 <div class="ripple-container"></div>
@@ -28,21 +29,25 @@
 
                         <div class="border">
                             <button class="btn btn-md btn-outline-primary" (click)="open(new)" >
-                              <i class="fa fa-user ml-2"></i>New MoneyPot</button>
+                              <i class="fa fa-user ml-2"></i>New Event</button>
                           </div>
+                          <div class="border">
+                           <button class="btn btn-md btn-outline-primary" [routerLink]="['/calendar']">
+                             <i class="fa fa-user ml-2"></i>Calendar</button>
+                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped" id="table">
                                 <thead class=" text-primary">
                                   
-                                     <th (click)="sort('Duration')">duration &nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('Bank details')"> bankDetails&nbsp;<i class="fa fa-sort"></i></th>   
+                                     <th (click)="sort('numberParticipant')">numberParticipant &nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('email')"> email&nbsp;<i class="fa fa-sort"></i></th>   
                                       
-                                     <th (click)="sort('Final Amount')"> finalAmount&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('Data')"> data&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('Name File')"> nameFile&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('File')">  files&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('Targeted Amount')"> targetedAmount&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('IDM')"> idM&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort(' startDate')"> startDate&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('endDate')"> endDate&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('location')"> Location&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('topic')">  topic&nbsp;<i class="fa fa-sort"></i></th>
+                                     
+                                     <th (click)="sort('id')"> id&nbsp;<i class="fa fa-sort"></i></th>
                                     
                                         
                                 
@@ -52,15 +57,16 @@
                                 <tbody> 
                                    
                                      <tr *ngFor="let u of filtered_list | orderBy: key: reverse | paginate: {itemsPerPage:2,currentPage:page};" >
-
-                                         <td>{{u.duration | date:'dd/MM/yyyy'}}</td>
-                                         <td>{{u.bankDetails}}</td>
-                                         <td>{{u.finalAmount}}</td> 
-                                         <td>{{u.data}}</td>  
-                                         <td>{{u.nameFile}}</td> 
-                                         <td>{{u.files}}</td> 
-                                         <td>{{u.targetedAmount}}</td>
-                                        <td>{{ u.idM}}</td> 
+                                       
+                                       
+                                        <td>{{u.numberParticipant}}</td>
+                                        <td>{{u.email}}</td>
+                                         <td>{{u.startDate | date:'dd/MM/yyyy'}}</td>
+                                         <td>{{u.endDate | date:'dd/MM/yyyy'}}</td>
+                                         
+                                         <td>{{u.location}}</td> 
+                                         <td>{{u.topic}}</td>
+                                        <td>{{ u.id}}</td> 
                                        
                                            
                                     
@@ -73,7 +79,7 @@
                                             
                                             <button class="btn btn-sm btn-warning"  (click)="open(edit,u)">
                                               <i class="fa fa-edit"></i>Edit</button>
-                                            <button class="btn btn-sm btn-danger" (click)="deleteMoneyPot(u.idM)">
+                                            <button class="btn btn-sm btn-danger" (click)="deleteEvent(u.id)">
                                               <i class="fa fa-remove"></i>Delete</button>
                                           </td>
                                     </tr>
@@ -92,7 +98,7 @@
                      
                 <ng-template #new let-modal style="z-index: 0 !important;">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">New MoneyPot</h4>
+                      <h4 class="modal-title" id="modal-basic-title">New Event</h4>
                       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -101,25 +107,36 @@
                         <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label text-nowrap"
-                                   for="bankDetails">Bank Details:</label>
+                                   for="numberParticipant">Numbre_Participant:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" ngModel id="bankDetails" name="bankDetails"/>
+                                   <input type="text" class="form-control" ngModel id="numberParticipant" name="numberParticipant"/>
                                 </div>
                                 <label class="col-sm-2 control-label text-nowrap"
-                                for="bankDetails">Duration:</label>
-                             <div class="col-sm-duration">
-                                <input type="text" class="form-control" ngModel id="duration" name="duration" />
+                                   for="email">Email:</label>
+                                <div class="col-sm-10">
+                                   <input type="text" class="form-control" ngModel id="email" name="email"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="startDate">Start_Date:</label>
+                                <div class="col-sm-10">
+                                   <input type="text" class="form-control" ngModel id="startDate" name="startDate"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="endDate">End_Date:</label>
+                                <div class="col-sm-10">
+                                   <input type="text" class="form-control" ngModel id="endDate" name="endDate"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                for="location">location:</label>
+                             <div class="col-sm-10">
+                                <input type="text" class="form-control" ngModel id="location" name="location"/>
                              </div>
                              <label class="col-sm-2 control-label text-nowrap"
-                             for="finalAmount">Final Amount</label>
+                             for="topic">Topic:</label>
                           <div class="col-sm-10">
-                             <input type="text" class="form-control" ngModel id="finalAmount" name="finalAmount" />
+                             <input type="text" class="form-control" ngModel id="topic" name="topic"/>
                           </div>
-                          <label class="col-sm-2 control-label text-nowrap"
-                          for="targetedAmount">Targeted Amount</label>
-                       <div class="col-sm-10">
-                          <input type="text" class="form-control" ngModel id="targetedAmount" name="targetedAmount" />
-                       </div>
+                                
                       
                     </div>
                     <div class="border text-center">
@@ -137,7 +154,7 @@
 
                   <ng-template #edit let-modal style="z-index: 0 !important;">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Edit MoneyPot</h4>
+                      <h4 class="modal-title" id="modal-basic-title">Edit Event</h4>
                       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -147,32 +164,38 @@
                             <div class="form-group">
                                 <div hidden>
                                     <label class="col-sm-2 control-label text-nowrap"
-                                    for="idM">idMt</label>
+                                    for="id">id</label>
                                  <div class="col-sm-10">
-                                    <input type="text" class="form-control"  id="idM" [(ngModel)]="moneypot.idM" name="idM" />
+                                    <input type="text" class="form-control"  id="id" [(ngModel)]="events.id" name="id" />
                                  </div>
                                 </div>
                               
 
                                 <label class="col-sm-2 control-label text-nowrap"
-                                   for="bankDetails">Bank Details:</label>
+                                   for="Numbre_Participant">Numbre_Participant:</label>
                                 <div class="col-sm-10">
-                                   <input type="text"  class="form-control" [(ngModel)]="moneypot.bankDetails" id="bankDetails" name="bankDetails"/>
+                                   <input type="text"  class="form-control" [(ngModel)]="events.numberParticipant" id="numberParticipant" name="numberParticipant"/>
                                 </div>
-                                <label class="col-sm-2 control-label text-nowrap"
-                                for="bankDetails">Duration:</label>
+                               
+                                <label class="col-sm-2 control-label text-nowrap" 
+                                for="Start_Date">Start_Date:</label>
                              <div class="col-sm-duration">
-                                <input type="text" class="form-control" [(ngModel)]="moneypot.duration" id="duration" name="duration" />
+                                <input type="text" class="form-control" [(ngModel)]="events.startDate" id="startDate" name="startDate" />
                              </div>
                              <label class="col-sm-2 control-label text-nowrap"
-                             for="finalAmount">Final Amount</label>
+                             for="End_Date">End_Date</label>
                           <div class="col-sm-10">
-                             <input type="text" class="form-control"  id="finalAmount" [(ngModel)]="moneypot.finalAmount" name="finalAmount" />
+                             <input type="text" class="form-control"  id="endDate" [(ngModel)]="events.endDate" name="endDate" />
                           </div>
                           <label class="col-sm-2 control-label text-nowrap"
-                          for="targetedAmount">Targeted Amount</label>
+                          for="location">location</label>
                        <div class="col-sm-10">
-                          <input type="text" class="form-control"  id="targetedAmount" name="targetedAmount" [(ngModel)]="moneypot.targetedAmount"/>
+                          <input type="text" class="form-control"  id="location" name="location" [(ngModel)]="events.location"/>
+                       </div>
+                       <label class="col-sm-2 control-label text-nowrap"
+                          for="Topic">Topic</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control"  id="topic" name="topic" [(ngModel)]="events.topic"/>
                        </div>
                       
                     </div>

@@ -17,13 +17,16 @@ import { NgForm } from '@angular/forms';
   templateUrl: './moneypot.component.html',
   styleUrls: ['./moneypot.component.css']
 })
+
+
 export class MoneypotComponent implements OnInit {
   moneypot: MoneyPot;
   list : MoneyPot[];
   form : boolean = false;
-  
+  duration: any;
   closeResult! : string;
- 
+  bankDetails: string = '';
+  filtered_list: MoneyPot[];
   constructor(private ms: MoneypotService, private modalService: NgbModal){}
   totalLength:any;
   page:number = 1;
@@ -34,6 +37,7 @@ export class MoneypotComponent implements OnInit {
 getMoneyPotList(){
   this.ms.getMoneyPotList().subscribe(res=>{
   this.list=res;
+  this.filtered_list = this.list;
   console.log(res);
   this.totalLength = res.length;
   });
@@ -79,6 +83,8 @@ private getDismissReason(reason: any): string {
 }
 
   addMoneyPot(moneypot){
+    console.log( moneypot);
+    
    this.ms.addMoneyPot(moneypot).subscribe(data=>{
      console.log("result is " + data);
      
@@ -94,19 +100,7 @@ private getDismissReason(reason: any): string {
     });
    }
 
-//  }
-// passAjout(){
-//   this.router.navigate(['client/ajoutclient']);
-// }
 
-//  editMoneyPot(moneypot : MoneyPot){
-//    this.ms.editMoneyPot(moneypot).subscribe();
- 
-//  }
-
-  // cancel(){
-  //   this.form =false;
-  // }
 
    deleteMoneyPot(idM){
      console.log(idM);
@@ -119,38 +113,39 @@ private getDismissReason(reason: any): string {
       });
       }
 
-    // open(id:number) {
-    //   this.ms.open(id, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    //     this.closeResult = `Closed with: ${result}`;
-    //   }, (reason) => {
-    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //   });
-    // }
-  
-    // private getDismissReason(reason: any): string {
-    //   if (reason === ModalDismissReasons.ESC) {
-    //     return 'by pressing ESC';
-    //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-    //     return 'by clicking on a backdrop';
-    //   } else {
-    //     return `with: ${reason}`;
-    //   }
-    // }
+    
+      Search(){
 
+
+        console.log(this.bankDetails.toLocaleString());
+      
+          this.filtered_list = this.list.filter(res =>{
+          
+            return res.bankDetails.toLocaleString().match(this.bankDetails.toLocaleString());
+          })
+        
+        console.log('----');
+        console.log(this.list);
+        
+ 
+      }
+  
+      key:string='idM';
+      reverse:boolean =false;
+      sort(key){
+      this.key= key;
+      this.reverse = !this.reverse;
+      }
+    }  
 
    
     
-  }
+  
  
  
 
 
-//  openSweetalert(idM: number){
-//    console.log(idM);
 
-
-//    this.getMoneyPotList()
-   
  
  
 

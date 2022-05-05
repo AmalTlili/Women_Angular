@@ -8,6 +8,7 @@ import { MoneyPot } from './modals/moneypot';
 })
 export class MoneypotService {
 
+
   list: MoneyPot[]; 
  
   baseUrl:string='http://localhost:8081/';

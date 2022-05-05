@@ -1,15 +1,27 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
+//paginationmodule
+import {NgxPaginationModule} from 'ngx-pagination'; 
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MoneypotService } from './moneypot.service';
+import { MoneypotComponent } from './moneypot/moneypot.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction';
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
-@NgModule({
+@NgModule({ 
   imports: [
     HttpClientModule,
     BrowserAnimationsModule,
@@ -18,12 +30,14 @@ import { MoneypotService } from './moneypot.service';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    Ng2OrderModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
   ],
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }

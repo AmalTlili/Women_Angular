@@ -1,0 +1,11 @@
+::ng-deep .navbar-brand, #navbarDropdownMenuLink{
+    display: none;
+}
+
+::ng-deep .navbar{
+    display: none;
+}
+
+#navigation{
+    display: none;
+}

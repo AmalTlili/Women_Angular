@@ -29,6 +29,9 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { EventsCalendarComponent } from 'app/events-calendar/events-calendar.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { QrcodeEventComponent } from 'app/qrcode-event/qrcode-event.component';
+import {MatIconModule} from '@angular/material/icon';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -48,11 +51,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    MatIconModule,
     NgbModule,
     Ng2OrderModule,
     NgxPaginationModule,
-    FullCalendarModule 
-    
+    FullCalendarModule ,
+    ZXingScannerModule
   ],
   declarations: [
     DashboardComponent,
@@ -65,7 +69,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MoneypotComponent,
     EventsComponent,
     UserProfileComponent,
-    EventsCalendarComponent
+    EventsCalendarComponent,
+    QrcodeEventComponent
   ]
 })
 

@@ -13,9 +13,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MoneypotService } from './moneypot.service';
 import { MoneypotComponent } from './moneypot/moneypot.component';
+
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
+import { EventChartsComponent } from './event-charts/event-charts.component';
+import { QrcodeEventComponent } from './qrcode-event/qrcode-event.component';
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
@@ -33,6 +36,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     Ng2OrderModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,
+    
   ],
   declarations: [
     AppComponent,

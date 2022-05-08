@@ -27,7 +27,7 @@
                     </div>
                     <div class="card-body">
 
-                        <div class="border">
+                        <div class="border" [hidden]="!ableToAddEvent">
                             <button class="btn btn-md btn-outline-primary" (click)="open(new)" >
                               <i class="fa fa-user ml-2"></i>New Event</button>
                           </div>
@@ -35,6 +35,14 @@
                            <button class="btn btn-md btn-outline-primary" [routerLink]="['/calendar']">
                              <i class="fa fa-user ml-2"></i>Calendar</button>
                          </div>
+                         <div class="border">
+                         <button mat-fab color="primary" type="button" (click)="showqr1()"
+                         aria-label="Example icon button with a delete icon">
+                         <mat-icon>qr_code</mat-icon>
+                         <div class="container" [hidden]="show_qr_code">
+                            <app-qrcode-event (sender)="receiver($event)"></app-qrcode-event>
+                         </div>
+                       </button></div>
                         <div class="table-responsive">
                             <table class="table table-striped" id="table">
                                 <thead class=" text-primary">
@@ -76,7 +84,7 @@
                                          
                                     
                                         <td>
-                                            
+                                        
                                             <button class="btn btn-sm btn-warning"  (click)="open(edit,u)">
                                               <i class="fa fa-edit"></i>Edit</button>
                                             <button class="btn btn-sm btn-danger" (click)="deleteEvent(u.id)">

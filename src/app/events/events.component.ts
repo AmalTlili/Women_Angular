@@ -10,11 +10,12 @@ import { Events } from 'app/modals/events';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
-
+  ableToAddEvent: boolean = false;
   events: Events;
   events_tmp: Events;
   list : Events[];
   form : boolean = false;
+  show_qr_code : boolean = true;
   // duration: any;
   closeResult! : string;
    location: string = '';
@@ -27,6 +28,15 @@ export class EventsComponent implements OnInit {
     this.getEventList()
 
   }
+  receiver(receivedFromChild:string){
+    console.log("from events "+ receivedFromChild)
+    if(receivedFromChild.endsWith("esprit.tn")){
+      this.ableToAddEvent = true;
+    }else{
+      this.ableToAddEvent = false;
+    }
+  }
+
   getEventList(){
   this.es.getEvents().subscribe(res=>{
   this.list=res;
@@ -99,7 +109,9 @@ private getDismissReason(reason: any): string {
     });
    }
 
-
+   showqr1(){
+    this.show_qr_code = !this.show_qr_code
+   }
 
    deleteEvent(id){
      console.log(id);

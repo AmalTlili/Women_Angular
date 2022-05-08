@@ -4,12 +4,14 @@ import { Component, OnInit , EventEmitter, Output} from '@angular/core';
 import { MoneypotService } from 'app/moneypot.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { MoneyPot } from 'app/modals/moneypot';
 import { content } from 'googleapis/build/src/apis/content';
+
 //import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
+import { event } from 'jquery';
 
 
 @Component({
@@ -26,8 +28,10 @@ export class MoneypotComponent implements OnInit {
   duration: any;
   closeResult! : string;
   bankDetails: string = '';
+  
   filtered_list: MoneyPot[];
-  constructor(private ms: MoneypotService, private modalService: NgbModal){}
+  constructor(private ms: MoneypotService, private modalService: NgbModal , private http :HttpClient){}
+
   totalLength:any;
   page:number = 1;
   ngOnInit(): void {  
@@ -112,6 +116,9 @@ private getDismissReason(reason: any): string {
     this.getMoneyPotList()
       });
       }
+
+
+    
 
     
       Search(){

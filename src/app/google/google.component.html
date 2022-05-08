@@ -1,0 +1,33 @@
+<h1 class="text-center">Mootaz</h1>
+<div class="jumbotron bg-transparent text-center">
+    <div class="card text-center">
+        <h6 class="card-header">
+          LoginWithGoogle
+        </h6>
+    <div class="card-block">
+        <h4 class="card-title">Not signedin</h4>
+        <p class="card-text">signin</p>
+  </div>
+  <div class="card-block">
+<button class="btn btn-social-icon btn-google mx-1" (click)="SignwithGoogle()">
+    <span class="fab fa-google"></span>
+</button>
+  </div>
+    </div>
+    <div *ngIf="user" class="card text-center">
+        <h6 class="card-header">
+       Login With Google
+        </h6>
+<div class="card-block"></div>
+<img *ngIf= "user.photoUrl"src="{{user.photoUrl}}" alt="" class="card-img-top img-responsive photo">
+<div class="card-block">
+    <h4 class="card-title">{{user.name}}</h4>
+    <p class="card-text">{{user.email}}</p>
+    <p class="card-text">Loggedinwith:{{user.provider}}</p>
+</div>
+<div class="card-block">
+<button class="btn btn-danger" (click)="Signout()">Signout</button>
+</div>
+    </div>
+
+</div>

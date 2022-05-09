@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment'; 
+import { environment } from 'src/environments/environment'; 
 import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient,HttpErrorResponse,HttpEvent,HttpHeaders,HttpParams,HttpRequest   } from '@angular/common/http';
@@ -16,10 +16,25 @@ export class JobService {
   constructor(private http:HttpClient) { }
 
 
-  data(){
-    return this.http.get(this.url+"job/all")
+  data():Observable<Job[]>{
+   
+    return this.http.get<Job[]>(this.url+"job/all")
+  }
+
+  addJob(data:Job){
+    return this.http.post(this.url+"job/add",data)
+
+  }
+  deleteJob(id:number){
+    return this.http.delete(this.url+"job/delete/"+id)
+  }
+
+  updateJob(id:number,data:Job){
+    return this.http.put(this.url+"job/update/"+id,data)
   }
 
 
-
+  getJobById(id:number):Observable<Job>{
+    return this.http.get<Job>(this.url+"job/"+id)
+  }
 }

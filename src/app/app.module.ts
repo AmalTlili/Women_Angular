@@ -9,6 +9,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import {NgbDateParserFormatter, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgModule} from '@angular/core';
 import {NgbDateCustomParserFormatter} from './typography/NgbDateCustomParserFormatter';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 @NgModule({
   imports: [
@@ -19,11 +21,13 @@ import {NgbDateCustomParserFormatter} from './typography/NgbDateCustomParserForm
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    NgxPaginationModule,
       NgbModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    UploadFileComponent
 
   ],
   providers: [

@@ -1,7 +1,7 @@
 import { StringMapWithRename } from "@angular/compiler/src/compiler_facade_interface";
 
 export class User{ 
-	id?:any;
+	iduser?:any;
 	username?:string ;
 	password?:string ;
 	email?:String;

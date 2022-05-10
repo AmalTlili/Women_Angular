@@ -1,5 +1,5 @@
-<div class="container">
-    <h2>Registration</h2>
+<div class="container" style="background-image:url(assets/img/137937407-international-woman-day-diversity-raised-fist-strong-girl-power-concept-woman-power-flat-design-hand.webp)">
+    <h2 style="color:palevioletred">Registration</h2>
     <form #registerform="ngForm" (ngSubmit)="registeruser()" >
       <div class="form-group">
         <div class="form-group">
@@ -30,7 +30,7 @@
       <div class="checkbox">
         <label><input type="checkbox" name="remember"> Remember me</label>
       </div>
-      <button [disabled]="registerform.form.invalid" type="submit" class="btn btn-danger" (click)="registeruser()">Register</button>
+      <button [disabled]="registerform.form.invalid" type="submit" class="btn btn-info" (click)="registeruser()">Register</button>
       <small class="float-right" [routerLink]="['/login']">An Existing User</small>
     </form>
   </div>

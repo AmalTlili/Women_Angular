@@ -9,11 +9,14 @@ import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ChartsComponent } from './charts/charts.component';
-import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { GoogleComponent } from './google/google.component';
+import { EmailComponent } from './email/email.component';
+import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.component';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+
 
 
 
@@ -26,6 +29,7 @@ const routes: Routes =[
 
   {
   
+    
     path: 'dashboard',
     redirectTo: 'dashboard',
     pathMatch: 'full',
@@ -40,13 +44,15 @@ const routes: Routes =[
   {path:'loginsuccess',component:LoginsuccessComponent},
   {path:'registration',component:RegistrationComponent},
   {path:'login',component:LoginComponent},
-  {path:'cal',component:CalendarComponent},
   {path:'charts',component:ChartsComponent},
-  { path: 'recon', component: ReconnaissanceComponent },
   { path: 'upload', component: UploadFileComponent },
   { path: 'user', component: UserProfileComponent },
   { path: 'userlist', component: UserListComponent },
-  { path: 'google', component: GoogleComponent }
+  { path: 'google', component: GoogleComponent },
+  { path: 'email', component: EmailComponent },
+  { path: 'reconnaisance', component: ReconnaissanceComponent },
+  {path:'calendar',component:CalendarComponent},
+  
 
  
 ];

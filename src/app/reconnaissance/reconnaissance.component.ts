@@ -1,7 +1,4 @@
 
-
-
-
 import {AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 declare let ml5: any;
 @Component({
@@ -9,7 +6,7 @@ declare let ml5: any;
   templateUrl: './reconnaissance.component.html',
   styleUrls: ['./reconnaissance.component.css']
 })
-export class  ReconnaissanceComponent implements OnInit, AfterViewInit {
+export class ReconnaissanceComponent implements OnInit, AfterViewInit {
   public mobileNetFeatureExtractor;
   public featureClassifier;
   public label;

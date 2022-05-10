@@ -20,10 +20,17 @@ import {
   FacebookLoginProvider
 } from 'angularx-social-login';
 import {ProgressBarModule} from 'angular-progress-bar';
-import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.component';
 import { ComponentsModule } from './components/components.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { EmailComponent } from './email/email.component';
+import { CrudComponent } from './crud/crud.component';
+import { AdduserComponent } from './adduser/adduser.component';
+import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.component';
+import { ProfileComponent } from './profile/profile.component';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 
@@ -46,7 +53,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ComponentsModule,
     AppRoutingModule,
     FullCalendarModule,
-    ModalModule.forRoot(), ProgressBarModule
+    ModalModule.forRoot(), ProgressBarModule,
+    Ng2SearchPipeModule
     
    
   ],
@@ -57,9 +65,14 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     LoginComponent,
     LoginsuccessComponent,
     CalendarComponent,
-    ReconnaissanceComponent,
     UserListComponent,
     UploadFileComponent,
+    EmailComponent,
+    CrudComponent,
+    AdduserComponent,
+    ReconnaissanceComponent,
+    ProfileComponent,
+   
 
  
    

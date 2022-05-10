@@ -30,6 +30,8 @@ import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.compone
 import { ProfileComponent } from './profile/profile.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UpdateuserComponent } from './updateuser/updateuser.component';
+import { SMSComponent } from './sms/sms.component';
 
 
 
@@ -72,6 +74,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AdduserComponent,
     ReconnaissanceComponent,
     ProfileComponent,
+    UpdateuserComponent,
+    SMSComponent,
    
 
  

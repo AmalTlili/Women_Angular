@@ -26,8 +26,6 @@ export class UserService {
   }
 
   getUserList():Observable<User[]>{
- 
-  
   return this._http.get<User[]>('http://localhost:8081/user/Afficheruser',this.httpOptions);
   
 }

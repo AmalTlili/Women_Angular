@@ -10,3 +10,45 @@ table {
 td, th {
     width: 25%;
 }
+p {
+    font-family: Lato;
+}
+
+.inp {
+    width: 360px;
+}
+
+.parent {
+    position: relative;
+}
+
+.child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fixed{
+    position: sticky;
+    top:0;
+    z-index: 999;
+}
+.container {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    color: #405065;
+}
+
+.search-hero {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+}
+
+.form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+.form-control::placeholder  {
+    font-family: FontAwesome;
+}

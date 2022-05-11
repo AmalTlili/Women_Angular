@@ -21,6 +21,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
         MatTableModule,
         MatPaginatorModule,
         NgxPaginationModule,
+        Ng2SearchPipeModule,
     ],
   declarations: [
     DashboardComponent,

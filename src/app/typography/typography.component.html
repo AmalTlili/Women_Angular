@@ -11,54 +11,50 @@
         </div>
         <div class="card-body">
             <div class="container">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tile</th>
-                        <th>Description</th>
-                        <th>Stars</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                        <th>Availablity</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let training of Trainings">
-                        <td><span>{{training.id}}</span></td>
-                        <td><span>{{training.title}}</span></td>
-                        <td><span>{{training.description}}</span></td>
-                        <td><span>{{training.stars}}</span></td>
-                        <td><span>{{training.startDate}}</span></td>
-                        <td><span>{{training.endDate}}</span></td>
-                        <td><span>{{training.availablity}}</span></td>
-                        <td>
-                            <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, training)">
-                                <i class="fa fa-search"></i>Details</button>
-                            <button class="btn btn-sm btn-warning">
-                                <i class="fa fa-edit" (click)="openEdit(contentEdit, training)"></i>Edit</button>
-                            <button class="btn btn-sm btn-danger">
-                                <i class="fa fa-remove" (click)="Delete(contentEdit, training)"></i>Delete</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <label class="btn btn-default p-0">
-                    <input type="file" (change)="selectFile($event)"/>
-                </label>
-            </div>
+                <div class="search-hero">
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a Training by id or title">
+                </div>
+                <div style="text-align:center">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tile</th>
+                            <th>Description</th>
+                            <th>Stars</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Availablity</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let training of Trainings  | paginate: config | filter:searchText">
+                            <th scope="row">{{training.id}}</th>
+                            <td><span>{{training.title}}</span></td>
+                            <td><span>{{training.description}}</span></td>
+                            <td><span>{{training.stars}}</span></td>
+                            <td><span>{{training.startDate}}</span></td>
+                            <td><span>{{training.endDate}}</span></td>
+                            <td><span>{{training.availablity}}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, training)">
+                                    <i class="fa fa-search"></i>Details</button>
+                                <button class="btn btn-sm btn-warning">
+                                    <i class="fa fa-edit" (click)="openEdit(contentEdit, training)"></i>Edit</button>
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="fa fa-remove" (click)="Delete(contentEdit, training)"></i>Delete</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-            <div class="col-4">
-                <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload(2)">
-                    Upload file
-                </button>
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+                </div>
             </div>
         </div>
+
 
         <div *ngIf="message" class="alert alert-success" role="alert">{{ message }}</div>
         <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{ errorMsg }}</div>
@@ -87,6 +83,35 @@
                       <i class="fa fa-search"></i>Assign</button>
               </div>
           </div>
+      <div class="card">
+          <div class="card-header card-header-danger" >
+              <h4 class="card-title">Upload Certificat</h4>
+              <p class="card-category">Upload Certificat to training</p>
+          </div>
+          <div style="margin: 5%;">
+              <mat-form-field appearance="fill">
+                  <mat-label>Trainings</mat-label>
+
+                  <mat-select (selectionChange)="onChangeTrainingForCertificate($event)" >
+                      <mat-option  *ngFor="let sec of Trainings; let i = index" [value]="Trainings[i].id">
+                          {{Trainings[i].title}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <div class="row">
+                  <div class="col-8">
+                      <label class="btn btn-default p-0">
+                          <input type="file" (change)="selectFile($event)"/>
+                      </label>
+                  </div>
+
+                  <div class="col-4">
+                      <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload(uploadCertificateToThis)">
+                          Upload file
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
 
 </div>
 </div>

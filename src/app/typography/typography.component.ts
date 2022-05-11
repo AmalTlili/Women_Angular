@@ -8,27 +8,16 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSelectChange} from '@angular/material/select';
 import {UploadFileComponent} from '../components/upload-file/upload-file.component';
 import {UploadFileService} from '../services/upload-files.service';
-
-export class Training {
-  constructor(
-      public id: number,
-      public description: string,
-      public title: string,
-      public availablity: string,
-      public domain: string,
-      public stars: number,
-      public startDate: string,
-      public endDate: string
-  ) {
-  }
-}
+import {TrainingServiceService} from '../services/training-service.service';
+import {Training} from '../models/Training.model';
 @Component({
   selector: 'app-typography',
   templateUrl: './typography.component.html',
   styleUrls: ['./typography.component.css']
 })
 export class TypographyComponent implements OnInit {
-  Trainings: Training[];
+  Trainings: Training[] = [];
+  lentgh : any;
   closeResult: string;
   editForm: FormGroup;
   displayedColumns: string[] = ['id', 'Tile', 'Description', 'Stars', 'Start date', 'End date', 'Availablity'];
@@ -44,12 +33,21 @@ export class TypographyComponent implements OnInit {
   currentFile?: File;
   message = '';
   errorMsg = '';
+  config: any;
+  uploadCertificateToThis: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private router: any;
   // tslint:disable-next-line:max-line-length
-  constructor(private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder, private uploadService: UploadFileService
+  searchText: any;
+  constructor( private TrainingService: TrainingServiceService, private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder, private uploadService: UploadFileService
   ) {
+    // this.lentgh = 0;
+    // this.config = {
+    //   itemsPerPage: 5,
+    //   currentPage: 1,
+    //   totalItems: 60
+    // };
   }
   getRequestParams(searchTitle: string, page: number, pageSize: number): any {
     // tslint:disable-next-line:prefer-const
@@ -65,14 +63,7 @@ export class TypographyComponent implements OnInit {
     }
     return params;
   }
-  getTrainings() {
-    this.httpClient.get<any>('http://localhost:8081/women/Training/getTrainings').subscribe(
-        response => {
-          console.log(response);
-          this.Trainings = response;
-        }
-    );
-  }
+
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -93,7 +84,6 @@ export class TypographyComponent implements OnInit {
     }
   }
   onSubmit(f: NgForm) {
-    const url = 'http://localhost:8081/women/Training/add';
     f.value.startDate =
         new Date(
             f.value.startDate.year,
@@ -105,12 +95,10 @@ export class TypographyComponent implements OnInit {
             f.value.endDate.month,
             f.value.endDate.day);
     console.log(f.value);
-
-    this.httpClient.post(url, f.value)
-        .subscribe((result) => {
-          console.log(result);
-          this.ngOnInit();
-        });
+    this.TrainingService.create(f.value).subscribe((result) => {
+            console.log(result);
+            this.ngOnInit();
+          })
     this.modalService.dismissAll();
   }
   openDetails(targetModal, training: Training) {
@@ -129,8 +117,17 @@ export class TypographyComponent implements OnInit {
 
   }
   Delete(targetModal, training: Training) {
-    this.httpClient.delete('http://localhost:8081/women/Training/remove/' + training.id).subscribe((result) => {
-      console.log(result); });
+    // this.httpClient.delete('http://localhost:8081/women/Training/remove/' + training.id).subscribe((result) => {
+    //   console.log(result); });
+    this.TrainingService.delete(training.id)
+        .subscribe(
+            response => {
+              console.log(response);
+              // this.router.navigate(['/tutorials']);
+            },
+            error => {
+              console.log(error);
+            });
     const index: number = this.Trainings.indexOf(training);
     if (index !== -1) {
       this.Trainings.splice(index, 1);
@@ -150,8 +147,20 @@ export class TypographyComponent implements OnInit {
       availablity : training.availablity
     });
   }
+  retrieveTrainings(): void {
+    this.TrainingService.getTrainings()
+        .subscribe(
+            data => {
+              this.Trainings = data;
+              console.log(data);
+            },
+            error => {
+              console.log(error);
+            });
+    this.lentgh = this.Trainings.length;
+  }
   ngOnInit() {
-    this.getTrainings();
+    this.retrieveTrainings();
     this.editForm = this.fb.group({
       id: [''],
       firstname: [''],
@@ -160,6 +169,11 @@ export class TypographyComponent implements OnInit {
       email: [''],
       country: ['']
     } );
+    this.config = {
+      itemsPerPage: 5,
+      currentPage: 1,
+      totalItems: this.lentgh
+    };
   }
 
   onChangeTraining($event: MatSelectChange) {
@@ -206,4 +220,14 @@ export class TypographyComponent implements OnInit {
       this.selectedFiles = undefined;
     }
   }
+
+  pageChanged($event: number) {
+    console.log($event)
+      this.config.currentPage = $event;
+  }
+
+  onChangeTrainingForCertificate($event: MatSelectChange) {
+    this.uploadCertificateToThis = $event.value;
+  }
+
 }

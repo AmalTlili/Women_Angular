@@ -11,6 +11,8 @@ import {NgModule} from '@angular/core';
 import {NgbDateCustomParserFormatter} from './typography/NgbDateCustomParserFormatter';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
     RouterModule,
     AppRoutingModule,
     NgxPaginationModule,
-      NgbModule
+      NgbModule,
+    BrowserModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     AppComponent,

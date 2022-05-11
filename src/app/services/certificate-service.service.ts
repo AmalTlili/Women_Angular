@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent} from '@angular/common/http';
 import {Certificate} from '../models/Certifficate.model';
 
 const baseUrl = 'http://localhost:8081/women/Certificate';
@@ -18,9 +18,9 @@ export class CertificateServiceService {
     // @ts-ignore
     return this.httpClient.get(`${baseUrl}/getCertificate/${id}`);
   }
-  VerifyCertificate(QR: any): Observable<Certificate> {
+  VerifyCertificate(QR: any): Observable<any> {
     // @ts-ignore
-    return this.httpClient.get(`${baseUrl}/verify/${QR}`);
+    return this.httpClient.get(`${baseUrl}/verify/${QR}`, {responseType: 'text'});
   }
   create(data: any): Observable<any> {
     return this.httpClient.post(`${baseUrl}/add`, data);

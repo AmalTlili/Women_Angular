@@ -14,6 +14,7 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
 import {BrowserModule} from '@angular/platform-browser';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -26,7 +27,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     NgxPaginationModule,
       NgbModule,
     BrowserModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ZXingScannerModule
   ],
   declarations: [
     AppComponent,

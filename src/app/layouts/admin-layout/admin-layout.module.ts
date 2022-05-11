@@ -24,6 +24,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {Training} from '../../models/Training.model';
 import {TrainingsComponent} from '../../Trainings/Trainings.component';
+import {ZXingScannerModule} from '@zxing/ngx-scanner';
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import {TrainingsComponent} from '../../Trainings/Trainings.component';
         MatPaginatorModule,
         NgxPaginationModule,
         Ng2SearchPipeModule,
+        ZXingScannerModule,
     ],
   declarations: [
     DashboardComponent,

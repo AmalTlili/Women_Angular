@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     {
     next: data=>{
       console.log("response received");
-    this._router.navigate(['/user'])
+    this._router.navigate(['/userlist'])
     },
     error:error=>{
       console.log("exception occured");

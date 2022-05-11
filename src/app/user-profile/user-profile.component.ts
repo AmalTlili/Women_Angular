@@ -1,6 +1,4 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import { jsPDF } from "jspdf";
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,23 +7,9 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private _router:Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-  @ViewChild('content',{static:false}) el!:ElementRef;
-
-  makepdf(){
-    let pdf= new jsPDF('p','pt','a4');
-    pdf.html(this.el.nativeElement,{
-     callback:(pdf)=>{
-       pdf.save("User.pdf");
-     }
-    });
-    pdf.save();
-  }
-  uploadfile(){
-    this._router.navigate(['/upload']);
   }
 
 }

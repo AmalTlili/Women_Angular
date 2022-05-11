@@ -1,0 +1,28 @@
+
+<div class="container" >
+    <h2 style="color:palevioletred ">User Login/SignIn</h2>
+    <form #loginform="ngForm" (ngSubmit)="loginuser()"  >
+        {{loginform.form.valid}}
+        <small class="text-danger">{{msg}}</small>
+      <div class="form-group">
+        <label for="email">Username:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter username" name="email" [(ngModel)]="user.username" required #Username="ngModel"
+        [class.is-invalid]="Username.invalid && Username.touched">
+        <small class="text-danger"[class.d-none]="Username.valid || Username.untouched">Username is required</small> -->
+      
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" [(ngModel)]="user.password" required #Password="ngModel"
+        [class.is-invalid]="Password.invalid && Password.touched">
+        <small class="text-danger"[class.d-none]="Password.valid || Password.untouched">Password is required</small>
+      </div>
+      <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="remember"> Remember me</label>
+      </div>
+      <button [disabled]="loginform.form.invalid"  type="submit" class="btn btn-info">Login</button>
+    </form>
+    <!-- <small class="float-right" (click)="gotoregistration()">New user?  Register here?</small> -->
+    <small class="float-right" [routerLink]="['/registration']">New user?  Register here?</small>
+  </div>

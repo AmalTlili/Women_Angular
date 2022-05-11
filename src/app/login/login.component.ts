@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this._router.navigate(['/userlist'])
     },
     error:error=>{
-      console.log("exception occured");
+      console.log(error);
       this.msg="Bad credentials,Please enter valid username and password"
     }
     })

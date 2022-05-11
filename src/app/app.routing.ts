@@ -34,8 +34,8 @@ const routes: Routes =[
   {
   
     
-    path: 'dashboard',
-    redirectTo: 'dashboard',
+    path: '',
+    redirectTo: 'login',
     pathMatch: 'full',
   }, {
     path: '',

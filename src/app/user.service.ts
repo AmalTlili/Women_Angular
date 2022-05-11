@@ -16,7 +16,7 @@ export class UserService {
   listn: Notification[];
 
   
-  httpOptions = { headers: new HttpHeaders().set('Authorization',`Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIE1hbmFnZW1lbnQgUG9ydGFsIiwic3ViIjoiZmFyd2ExIiwiaXNzIjoiR2V0IEFycmF5cywgTExDIiwiZXhwIjoxNjUyNTI4ODc3LCJpYXQiOjE2NTIwOTY4NzcsImF1dGhvcml0aWVzIjpbInVzZXI6cmVhZCIsInVzZXI6Y3JlYXRlIiwidXNlcjp1cGRhdGUiLCJ1c2VyOmRlbGV0ZSJdfQ.Q1FA9XDOS-G4PHaVgqh4KEkCO8_oPdXSPRkc5GE-aDpRwXDX9LjxaTckLhVkmKAxGcf9KhtNvbiJShk9jDdewQ"}`)};
+  httpOptions = { headers: new HttpHeaders().set('Authorization',`Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIE1hbmFnZW1lbnQgUG9ydGFsIiwic3ViIjoiZmFyd2ExIiwiaXNzIjoiR2V0IEFycmF5cywgTExDIiwiZXhwIjoxNjUyNDMyNDE5LCJpYXQiOjE2NTIwMDA0MTksImF1dGhvcml0aWVzIjpbInVzZXI6cmVhZCIsInVzZXI6Y3JlYXRlIiwidXNlcjp1cGRhdGUiLCJ1c2VyOmRlbGV0ZSJdfQ.1cBZ-El79IjkoUTSbye8idcd1e4Rb_F6fg_PzBb84eQ8JAwvkbXdLRaNT3UfrV3VkhVdpRaBxUZ8bwY3i8yc1A"}`)};
   private deleteURL = "http://localhost:8081/user/DeleteUser";
   
 
@@ -28,7 +28,7 @@ export class UserService {
   getUserList():Observable<User[]>{
  
   
-  return this._http.get<User[]>("http://localhost:8081/user/Afficheruser",this.httpOptions);
+  return this._http.get<User[]>('http://localhost:8081/user/Afficheruser',this.httpOptions);
   
 }
 adduser(user):Observable<any>{

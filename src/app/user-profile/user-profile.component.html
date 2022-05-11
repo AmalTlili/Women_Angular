@@ -12,7 +12,7 @@
                           <div class="row">
                               <div class="col-md-5">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="" disabled>
+                                    <input matInput placeholder="Company (disabled)" disabled>
                                   </mat-form-field>
                               </div>
                               <div class="col-md-3">
@@ -78,55 +78,6 @@
                               </div>
                           </div>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="makepdf()">Print PDF</button>
-                          <button mat-raised-button type="submit" class="btn btn-success"(click)="uploadfile()">UploadFile</button>
-                          <button mat-raised-button type="submit" class="btn btn-success" [routerLink]="['/sms']">Send SMS</button>
-                          <div id="content" #content>
-                            <table class="table table-sm">
-                              <thead>
-                                <tr>
-                                  <th scope="col">*</th>
-                                  <th scope="col">FirstName</th>
-                                  <th scope="col">LastName</th>
-                                  <th scope="col">Birthdate</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Farwa</td>
-                                  <td>Mootaz</td>
-                                  <td>01/05/1998</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>Foulen</td>
-                                  <td>BenFoulen</td>
-                                  <td>12/05/1970</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td>Bensalah</td>
-                                  <td>Salah</td>
-                                  <td>10/06/2000</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">4</th>
-                                  <td>Faroua</td>
-                                  <td>MootezT</td>
-                                  <td>01/02/1996</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">5</th>
-                                  <td>Farwa</td>
-                                  <td >Ali</td>
-                                  <td>20/20/1985</td>
-                                </tr>
-                              </tbody>
-                            </table>
-
-
-                          </div>
                           <div class="clearfix"></div>
                       </form>
                   </div>
@@ -136,12 +87,12 @@
               <div class="card card-profile">
                   <div class="card-avatar">
                       <a href="javascript:void(0)">
-                          <img class="img" src="./assets/img/faces/74908132_2152163621758252_7901411030478094336_n.jpg" />
+                          <img class="img" src="./assets/img/faces/marc.jpg" />
                       </a>
                   </div>
                   <div class="card-body">
-                      <h6 class="card-category text-gray">Owner</h6>
-                      <h4 class="card-title">Farwa Mootaz</h4>
+                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                      <h4 class="card-title">Alec Thompson</h4>
                       <p class="card-description">
                           Don't be scared of the truth because we need to restart the Women rights
                       </p>

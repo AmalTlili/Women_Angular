@@ -25,6 +25,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {Training} from '../../models/Training.model';
 import {TrainingsComponent} from '../../Trainings/Trainings.component';
 import {ZXingScannerModule} from '@zxing/ngx-scanner';
+import {CertificateComponent} from '../../Certificate/Certificate.component';
 
 @NgModule({
     imports: [
@@ -55,6 +56,7 @@ import {ZXingScannerModule} from '@zxing/ngx-scanner';
     NotificationsComponent,
     UpgradeComponent,
       TrainingsComponent,
+      CertificateComponent
   ]
 })
 

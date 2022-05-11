@@ -22,6 +22,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {Training} from '../../models/Training.model';
+import {TrainingsComponent} from '../../Trainings/Trainings.component';
 
 @NgModule({
     imports: [
@@ -50,6 +52,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+      TrainingsComponent,
   ]
 })
 

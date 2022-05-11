@@ -150,7 +150,7 @@ material-dashboard-angular
 │   │   ├── typography
 │   │   │   ├── typography.component.css
 │   │   │   ├── typography.component.html
-│   │   │   ├── typography.component.spec.ts
+│   │   │   ├── Trainings.component.spec.ts
 │   │   │   └── typography.component.ts
 │   │   ├── upgrade
 │   │   │   ├── upgrade.component.css

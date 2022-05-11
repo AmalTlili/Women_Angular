@@ -1,0 +1,249 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+        <div class="card-header card-header-danger" >
+            <h4 class="card-title">Training Management</h4>
+            <p class="card-category">Edit, select or delete any training from here.</p>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="search-hero">
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a Training by id or title">
+                </div>
+                <div style="text-align:center">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tile</th>
+                            <th>Description</th>
+                            <th>Stars</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Availablity</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let training of Trainings  | paginate: config | filter:searchText">
+                            <td><span>{{training.title}}</span></td>
+                            <td><span>{{training.description}}</span></td>
+                            <td><span>{{training.stars}}</span></td>
+                            <td><span>{{training.startDate}}</span></td>
+                            <td><span>{{training.endDate}}</span></td>
+                            <td><span>{{training.availablity}}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-info" (click)="Join(contentDetails, training)">
+                                    <i class="fa fa-search"></i>Join</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="message" class="alert alert-success" role="alert">{{ message }}</div>
+        <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{ errorMsg }}</div>
+    </div>
+          <div class="card">
+              <div class="card-header card-header-danger" >
+                  <h4 class="card-title">Assign</h4>
+                  <p class="card-category">Assign a trainer to training</p>
+              </div>
+              <div style="margin: 5%;">
+                  <mat-form-field appearance="fill">
+                      <mat-label>Trainings</mat-label>
+                      <mat-select (selectionChange)="onChangeTraining($event)" >
+                          <mat-option  *ngFor="let sec of Trainings; let i = index" [value]="Trainings[i].id">
+                              {{Trainings[i].title}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Formers</mat-label>
+                      <mat-select (selectionChange)="onChangeFormer($event)" >
+                          <mat-option  *ngFor="let sec of Trainings ; let i = index" [value]="Trainings[i].id">
+                              {{Trainings[i].title}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <button class="btn btn-sm btn-info">
+                      <i class="fa fa-search"></i>Assign</button>
+              </div>
+          </div>
+      <div class="card">
+          <div class="card-header card-header-danger" >
+              <h4 class="card-title">Upload Certificat</h4>
+              <p class="card-category">Upload Certificat to training</p>
+          </div>
+          <div style="margin: 5%;">
+              <mat-form-field appearance="fill">
+                  <mat-label>Trainings</mat-label>
+
+                  <mat-select (selectionChange)="onChangeTrainingForCertificate($event)" >
+                      <mat-option  *ngFor="let sec of Trainings; let i = index" [value]="Trainings[i].id">
+                          {{Trainings[i].title}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <div class="row">
+                  <div class="col-8">
+                      <label class="btn btn-default p-0">
+                          <input type="file" (change)="selectFile($event)"/>
+                      </label>
+                  </div>
+
+                  <div class="col-4">
+                      <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload(uploadCertificateToThis)">
+                          Upload file
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+</div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Training</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <div class="input-group">
+                    <input id="title" class="form-control" name="title" ngModel required #title="ngModel">
+                </div>
+                <label for="domain">Domain</label>
+                <div class="input-group">
+                    <input id="domain" class="form-control" name="domain" ngModel required #domain="ngModel">
+                </div>
+                <label for="description">Description</label>
+                <div class="input-group">
+                    <input id="description" class="form-control" name="description" ngModel required #description="ngModel">
+                </div>
+                <label for="availablity">Availablity</label>
+                <div class="input-group">
+                    <input id="availablity" class="form-control" name="availablity" ngModel required #availablity="ngModel">
+                </div>
+                <label for="startdate">Start date</label>
+                <div class="input-group">
+                    <input id="startDate" class="form-control" placeholder="yyyy-mm-dd" name="startDate" ngModel required ngbDatepicker #startDate="ngbDatepicker"  >
+                    <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"></button>
+                </div>
+                <label for="endDate">End date</label>
+                <div class="input-group">
+                    <input id="endDate" class="form-control" placeholder="yyyy-mm-dd" name="endDate" ngModel required ngbDatepicker #endDate="ngbDatepicker" >
+                    <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"></button>
+                </div>
+            </div>
+            </div>
+            <div class="border text-center">
+                <button data-dismiss="modal" class="btn btn-info">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2">Edit Training</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editForm" novalidate>
+            <div class="mb-3">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="title">
+                    </div>
+                    <label for="domain">Domain</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="domain">
+                    </div>
+                    <label for="description">Description</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="description">
+                    </div>
+                    <label for="availablity">Availablity</label>
+                    <div class="input-group">
+                        <input class="form-control" formControlName="availablity">
+                    </div>
+                    <label for="startdate">Start date</label>
+                    <div class="input-group">
+                        <input  class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate" ngModel required ngbDatepicker #startDate="ngbDatepicker"  >
+                        <button class="btn btn-outline-secondary calendar" (click)="startDate.toggle()" type="button"></button>
+                    </div>
+                    <label for="endDate">End date</label>
+                    <div class="input-group">
+                        <input  class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngModel required ngbDatepicker #endDate="ngbDatepicker" >
+                        <button class="btn btn-outline-secondary calendar" (click)="endDate.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="border text-center">
+                <button data-dismiss="modal" class="btn btn-info">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #contentDetails let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title1">Training details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div class="mb-3">
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="input-group">
+                        <input id="title1" class="form-control" readonly>
+                    </div>
+                    <label>Domain</label>
+                    <div class="input-group">
+                        <input id="domain1" class="form-control" readonly>
+                    </div>
+                    <label>Description</label>
+                    <div class="input-group">
+                        <input id="description1" class="form-control" readonly>
+                    </div>
+                    <label>Availablity</label>
+                    <div class="input-group">
+                        <input id="availablity1" class="form-control" readonly>
+                    </div>
+                    <label>Start date</label>
+                    <div class="input-group">
+                        <input id="startDate1" class="form-control" placeholder="yyyy-mm-dd" readonly>
+                    </div>
+                    <label>End date</label>
+                    <div class="input-group">
+                        <input id="endDate1" class="form-control" placeholder="yyyy-mm-dd" readonly>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
+    </div>
+</ng-template>

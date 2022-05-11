@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'app/modals/User';
 
 @Component({
   selector: 'updateuser',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./updateuser.component.css']
 })
 export class UpdateuserComponent implements OnInit {
-
+  user: User= new User();
   constructor() { }
 
   ngOnInit(): void {

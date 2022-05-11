@@ -38,6 +38,7 @@
     "@syncfusion/ej2-angular-schedule": "^20.1.50",
     "ajv": "8.11.0",
     "angular-progress-bar": "^1.0.11",
+    "angular2-qrcode": "^2.0.3",
     "angularx-social-login": "^4.1.0",
     "arrive": "2.4.1",
     "bootstrap": "^4.6.1",

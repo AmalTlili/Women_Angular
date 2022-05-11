@@ -18,6 +18,8 @@ import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.compone
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { SMSComponent } from './sms/sms.component';
 import { PopupComponent } from './popup/popup.component';
+import { BubblechartComponent } from './bubblechart/bubblechart.component';
+import { UpdateuserComponent } from './updateuser/updateuser.component';
 
 
 
@@ -46,16 +48,16 @@ const routes: Routes =[
   {path:'loginsuccess',component:LoginsuccessComponent},
   {path:'registration',component:RegistrationComponent},
   {path:'login',component:LoginComponent},
-  {path:'charts',component:ChartsComponent},
-  { path: 'upload', component: UploadFileComponent },
   { path: 'user', component: UserProfileComponent },
   { path: 'userlist', component: UserListComponent },
   { path: 'google', component: GoogleComponent },
   { path: 'email', component: EmailComponent },
   { path: 'reconnaisance', component: ReconnaissanceComponent },
   {path:'calendar',component:CalendarComponent},
-  {path:'sms',component:SMSComponent},
-  {path:'notification',component:PopupComponent}
+  {path:'google',component:GoogleComponent}
+  
+  
+  
   
 
  

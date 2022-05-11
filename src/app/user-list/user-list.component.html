@@ -11,12 +11,14 @@
                     <div>
                         <br>
                         <input class="form-control" type="text" name="username"  [(ngModel)]="username"  (ngModelChange)="Search()" placeholder="Enter FirstName to search">
+                        
                     </div>
                     <div class="card-body">
 
                         <div class="border">
                             <button class="btn btn-md btn-outline-primary" [routerLink]="['/adduser']" >
                               <i class="fa fa-user ml-2"></i>New User</button>
+                              
                               
                           </div>
                           
@@ -55,7 +57,7 @@
                                     
                                          
                                         <button (click) = "deleteuser(u.iduser)"  class = "btn btn-danger" style="margin-left: 10px"> Delete</button>
-                                        <button   class = "btn btn-success" style="margin-left: 10px">Update User</button>
+                                        <button   class = "btn btn-success" style="margin-left: 10px"  [routerLink]="['/updateuser/:id']">Update User</button>
                                          
                                         <!-- <button type="button" class="btn btn-outline-primary" (click)="openSweetalert(u.idM)">edit</button> -->
                                         <ng-template #new let-modal style="z-index: 0 !important;">

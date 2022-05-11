@@ -44,6 +44,16 @@ notificationuser(notification):Observable<any>{
   return this._http.post( "http://localhost:8081/notification/token",notification,this.httpOptions);
 }
 
+getUsernamebyyear():Observable<User[]>{
+ 
+  
+  return this._http.get<User[]>("http://localhost:8081/user/getusernamenumberbyyear",this.httpOptions);
+  
+}
+
+
+
+
 
   
 }

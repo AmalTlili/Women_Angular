@@ -11,6 +11,9 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { LoginComponent } from 'app/login/login.component';
 import { AdduserComponent } from 'app/adduser/adduser.component';
 import { SMSComponent } from 'app/sms/sms.component';
+import { UpdateuserComponent } from 'app/updateuser/updateuser.component';
+import { PopupComponent } from 'app/popup/popup.component';
+import { UploadFileComponent } from 'app/upload-file/upload-file.component';
 
 
 
@@ -64,8 +67,13 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
+    { path: 'notifications',  component: PopupComponent },
     { path: 'adduser',  component: AdduserComponent },
+    {path:'updateuser/:id',component:UpdateuserComponent},
+    {path:'sms',component:SMSComponent},
+    { path: 'upload', component: UploadFileComponent },
+  
+  
     
     
     

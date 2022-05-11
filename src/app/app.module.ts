@@ -33,6 +33,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UpdateuserComponent } from './updateuser/updateuser.component';
 import { SMSComponent } from './sms/sms.component';
 import { PopupComponent } from './popup/popup.component';
+import { QRCodeModule } from 'angular2-qrcode';
+import { QrcodeComponent } from './qrcode/qrcode.component';
+import { BubblechartComponent } from './bubblechart/bubblechart.component';
+
 
 
 
@@ -57,7 +61,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppRoutingModule,
     FullCalendarModule,
     ModalModule.forRoot(), ProgressBarModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,QRCodeModule,
+    SocialLoginModule
     
    
   ],
@@ -78,6 +83,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     UpdateuserComponent,
     SMSComponent,
     PopupComponent,
+    QrcodeComponent,
+    BubblechartComponent,
+  
    
 
  
@@ -100,7 +108,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '594429171551069'
+              'clientId:53077753982-kmfuotmjabnss7lv8bpevp8o397f42lf.apps.googleusercontent.com'
             )
           },
           {

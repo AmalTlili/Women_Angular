@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'registration',
@@ -8,12 +9,14 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private _router:Router) { }
+  constructor(private _router:Router,private authService: SocialAuthService) { }
 
   ngOnInit(): void {
   }
   registeruser(){
     this._router.navigate(['/user-profile']);
   }
+
+ 
 
 }

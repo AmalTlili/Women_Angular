@@ -4,6 +4,7 @@ import { UserService } from 'app/user.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-list',
@@ -17,7 +18,7 @@ user : User[];
 list:User[];
 filtered_list:User[];
 username: any;
-  constructor(private us:UserService,private modalService: NgbModal , private http :HttpClient) { }
+  constructor(private us:UserService,private modalService: NgbModal , private http :HttpClient,private router: Router) { }
   totalLength:any;
   closeResult! : string;
 
@@ -62,5 +63,8 @@ username: any;
       console.log(data);
       this.getUserList;
     })
+}
+updateuser(iduser:number){
+  this.router.navigate(['update-user',iduser])
 }
 }

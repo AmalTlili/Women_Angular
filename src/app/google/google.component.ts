@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialUser, SocialAuthService } from 'angularx-social-login';
+import { Router } from '@angular/router';
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
@@ -11,19 +12,24 @@ import {
   styleUrls: ['./google.component.css']
 })
 export class GoogleComponent implements OnInit {
-  user!:SocialUser;
+  public userDetails;
 
-  constructor(private authService:SocialAuthService) { }
+  constructor(private authService:SocialAuthService,private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.authState.subscribe((user)=>{
-      this.user=user;
-    })
+    const storage = localStorage.getItem('google_auth');
+
+    if (storage) {
+      this.userDetails = JSON.parse(storage);
+    } else {
+      this.signOut();
+    }
   }
 SignwithGoogle():any{
   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
 }
-Signout():any{
-  this.authService.signOut();
+signOut(): void {
+  localStorage.removeItem('google_auth');
+  this.router.navigateByUrl('/login').then();
 }
 }

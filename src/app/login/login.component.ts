@@ -8,6 +8,7 @@ import { RegistrationService } from 'app/registration.service';
 import { AuthService } from 'app/services/auth.service';
 import { response } from 'express';
 import { map } from 'rxjs/operators';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -16,7 +17,7 @@ import { map } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   user=new User();
   msg='';
-  constructor(private _service:RegistrationService,private _router:Router,private authservice:AuthService,private router: Router) { }
+  constructor(private _service:RegistrationService,private _router:Router,private authservice:AuthService,private router: Router,private authService: SocialAuthService) { }
 
   ngOnInit(): void {
   

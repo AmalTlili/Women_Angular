@@ -1,29 +1,140 @@
+<div class="container">
+	<div class="horizontal">
+		<div class="verticals twelve">
+		</div>
+	
+
+		
+		<div class="verticals ten offset-by-one">
+			<ol class="breadcrumb breadcrumb-fill2 style3">
+				<li><a href="javascript:void(0);"><i class="fa fa-home"></i></a></li>
+				<li><a href="javascript:void(0);">Complaints List</a></li> 
+				<li><a href="javascript:void(0);">Add complaints</a></li> 
+			</ol>
+		</div>
+		
+		
+		
+		<!-- <div class="verticals ten offset-by-one">
+			<ol class="breadcrumb breadcrumb-fill0">
+				<li><a href="javascript:void(0);"><i class="fa fa-home"></i></a></li>
+				<li><a href="javascript:void(0);">Library</a></li>
+				<li><a href="javascript:void(0);">Data</a></li>
+				<li class="active">Detail</li>
+			</ol>
+		</div> -->
+		
+		
+	</div>
+</div>
+
+
+
 
 <div class="main-content">
   <div class="container-fluid">
-      <div class="card card-plain">
-          <div class="card-header card-header-danger">
-              <h4 class="card-title">Material Design Icons</h4>
-              <p class="card-category">Handcrafted by our friends from
-                  <a target="_blank" href="https://fonts.google.com/icons">Google</a>
-              </p>
-          </div>
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="card-body">
-                      <div class="iframe-container d-none d-lg-block">
-                          <iframe src="https://material.io/design/iconography/system-icons.html#grid-and-keyline-shapes">
-                              <p>Your browser does not support iframes.</p>
-                          </iframe>
-                      </div>
-                      <div class="col-md-12 d-none d-sm-block d-md-block d-lg-none d-block d-sm-none text-center ml-auto mr-auto">
-                          <h5>The icons are visible on Desktop mode inside an iframe. Since the iframe is not working on Mobile and Tablets please visit the icons on their original page on Google. Check the
-                              <a href="https://fonts.google.com/icons" target="_blank">Material Icons</a>
-                          </h5>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-12 col-lg-11 col-xl-10">
+                <div class="card d-flex mx-auto my-5">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12 c1 p-5">
+                            <div class="row mb-5 m-3">  </div> <img src="https://i.imgur.com/kdE7GKw.jpg" width="120vw" height="210vh" class="mx-auto d-flex" alt="Teacher">
+                            <div class="row justify-content-center">
+                                <div class="w-75 mx-md-5 mx-1 mx-sm-2 mb-5 mt-4 px-sm-5 px-md-2 px-xl-1 px-2">
+                                    <h1 class="wlcm">We are proud to Help you</h1> <span class="sp1"> <span class="px-3 bg-danger rounded-pill"></span> <span class="ml-2 px-1 rounded-circle"></span> <span class="ml-2 px-1 rounded-circle"></span> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12 c2 px-5 pt-5">
+                            <div class="row">
+                            </div>
+                            <form  name="myform" (ngsubmit)="ajoutercomplaint()" class="px-5 pb-5">
+                                <div class="d-flex">
+                                    <h3 class="font-weight-bold">Start your Complaint</h3>
+                                </div>
+                                 <input type="text" name="userid"  [(ngModel)]="complaint.subject" placeholder="E-mail">
+                                 <input type="text" name="passw" [(ngModel)]="complaint.email"  placeholder="Subject"id=*m> <span class="ac" id="forgot"></span> 
+
+                                 <input type="text" name="userid" [(ngModel)]="complaint.description" placeholder="Description">
+                                 <!-- <input type="text" name="userid" placeholder="Event"> -->
+
+                                 <button class="text-white text-weight-bold bt" (click)="ajoutercomplaint()">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="card shadow mb-5 bg-white rounded">
+        
+    <div class="card-body">
+
+        <p class="card-title text-center shadow mb-5 rounded"> Complaint Form</p>
+ 
+ <div class="icons text-center">
+
+
+
+
+ </div>
+
+    <hr>
+
+        <p class="searchText"><strong>Search For Cheap Flights</strong></p>
+
+        <div class="row mb-3 mt-3">
+
+           
+        </div>
+
+
+        <div class="row">
+
+                <div class="col-sm-6">
+                    <input placeholder=" Arriving" type="text" id="date-picker-example" class="form-control datepicker"  >
+            </div>
+
+                <div class="col-sm-6">
+                    <input placeholder=" Arriving" type="text" id="date-picker-example" class="form-control datepicker"  >
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <input placeholder="Departing" type="text" id="date-picker-example" class="form-control datepicker mb-4"  >
+            </div>
+
+                <div class="col-sm-6">
+                    <input placeholder=" Arriving" type="text" id="date-picker-example" class="form-control datepicker"  >
+            </div>
+
+                </div>
+
+
+                  
+
+
+
+            
+
+                <a href="#" class="btn btn-primary float-right mt-5">Submit</a>
+            </div>
+        </div>  -->

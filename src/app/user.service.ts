@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './modals/User';
+import { Smsrequest } from './modals/smsrequest';
+import { Notification } from './modals/notification';
 
 
 @Injectable({
@@ -10,6 +12,8 @@ import { User } from './modals/User';
 })
 export class UserService {
   list: User[]; 
+  listt: Smsrequest[];
+  listn: Notification[];
 
   
   httpOptions = { headers: new HttpHeaders().set('Authorization',`Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIE1hbmFnZW1lbnQgUG9ydGFsIiwic3ViIjoiZmFyd2ExIiwiaXNzIjoiR2V0IEFycmF5cywgTExDIiwiZXhwIjoxNjUyNTI4ODc3LCJpYXQiOjE2NTIwOTY4NzcsImF1dGhvcml0aWVzIjpbInVzZXI6cmVhZCIsInVzZXI6Y3JlYXRlIiwidXNlcjp1cGRhdGUiLCJ1c2VyOmRlbGV0ZSJdfQ.Q1FA9XDOS-G4PHaVgqh4KEkCO8_oPdXSPRkc5GE-aDpRwXDX9LjxaTckLhVkmKAxGcf9KhtNvbiJShk9jDdewQ"}`)};
@@ -32,6 +36,12 @@ adduser(user):Observable<any>{
 }
 deleteuser(iduser: number): Observable<Object>{
   return this._http.delete(`${this.deleteURL}/${iduser}`,this.httpOptions);
+}
+smsuser(smsrequest):Observable<any>{
+  return this._http.post( "http://localhost:8081/api/v1/sms",smsrequest,this.httpOptions);
+}
+notificationuser(notification):Observable<any>{
+  return this._http.post( "http://localhost:8081/notification/token",notification,this.httpOptions);
 }
 
 

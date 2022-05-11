@@ -79,7 +79,8 @@
                           </div>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="makepdf()">Print PDF</button>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="uploadfile()">UploadFile</button>
+                          <button mat-raised-button type="submit" class="btn btn-success"(click)="uploadfile()">UploadFile</button>
+                          <button mat-raised-button type="submit" class="btn btn-success" [routerLink]="['/sms']">Send SMS</button>
                           <div id="content" #content>
                             <table class="table table-sm">
                               <thead>

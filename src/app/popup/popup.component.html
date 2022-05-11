@@ -1,0 +1,29 @@
+<div>
+    <form>
+        <div class="form-group" style="background-image:url(/assets/img/sidebar-3.jpg) ;">
+            <label>title</label>
+            <input type="text" class ="form-control" id = "title"
+                [(ngModel)] = "notification.title" name = "title">
+        </div>
+        <div class="form-group" style="background-image:url(/assets/img/sidebar-3.jpg) ;">
+            <label>message</label>
+            <input type="text" class ="form-control" id = "message"
+                [(ngModel)] = "notification.message" name = "message">
+        </div>
+        <div class="form-group" style="background-image:url(/assets/img/sidebar-3.jpg) ;">
+            <label>token</label>
+            <input type="text" class ="form-control" id = "token"
+                [(ngModel)] = "notification.token" name = "token">
+        </div>
+        <div>
+            <button mat-raised-button type="submit" class="btn btn-info pull-right"(click)="showNotification('top','left')" (click)="savenotif()">PushNotification</button>
+        </div>
+        <div>
+            <button mat-raised-button type="submit" class="btn btn-success" [routerLink]="['/sms']">SendSMS</button>
+        </div>
+
+
+    </form>
+
+
+</div>

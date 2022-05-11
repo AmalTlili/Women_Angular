@@ -10,6 +10,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { LoginComponent } from 'app/login/login.component';
 import { AdduserComponent } from 'app/adduser/adduser.component';
+import { SMSComponent } from 'app/sms/sms.component';
 
 
 
@@ -64,7 +65,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
-    { path: 'adduser',  component: AdduserComponent }
+    { path: 'adduser',  component: AdduserComponent },
+    
     
     
     

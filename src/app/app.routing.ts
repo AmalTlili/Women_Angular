@@ -16,6 +16,8 @@ import { GoogleComponent } from './google/google.component';
 import { EmailComponent } from './email/email.component';
 import { ReconnaissanceComponent } from './reconnaissance/reconnaissance.component';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { SMSComponent } from './sms/sms.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 
@@ -52,6 +54,8 @@ const routes: Routes =[
   { path: 'email', component: EmailComponent },
   { path: 'reconnaisance', component: ReconnaissanceComponent },
   {path:'calendar',component:CalendarComponent},
+  {path:'sms',component:SMSComponent},
+  {path:'notification',component:PopupComponent}
   
 
  

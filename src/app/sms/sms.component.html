@@ -1,1 +1,22 @@
-<p>sms works!</p>
+<form>
+<div>
+    <div class="form-group" style="background-image:url(/assets/img/sidebar-3.jpg) ;">
+        <label> phoneNumber</label>
+        <input type="text" class ="form-control" id = "phoneNumber"
+            [(ngModel)] = "sms.phoneNumber" name = "phoneNumber">
+    </div>
+    <div class="form-group">
+        <label> Message</label>
+        <input type="text" class ="form-control" id = "message"
+            [(ngModel)] = "sms.message" name = "message">
+    </div>
+    <div>
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="saveEmployee()">SendSMS</button>
+    </div>
+    <div>
+        <button mat-raised-button type="submit" class="btn btn-success" [routerLink]="['/notification']">notification</button>
+    </div>
+
+</div>
+
+</form>

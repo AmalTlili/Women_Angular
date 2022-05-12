@@ -74,6 +74,7 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'Certificate', component: CertificateComponent},
     {path: 'moneypot', component: MoneypotComponent},
     {path: 'job', component: JobComponent},
+    { path: 'icons',          component: IconsComponent },
     {path: 'events', component: EventsComponent},
     {path: 'calendar', component: EventsCalendarComponent},
     {path: 'maps', component: MapsComponent},

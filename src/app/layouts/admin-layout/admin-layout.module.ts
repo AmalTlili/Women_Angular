@@ -35,6 +35,7 @@ import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatIconModule} from '@angular/material/icon';
 import {JobComponent} from '../../job/job.component';
+import {ComplaintlisComponent} from '../../complaint/complaintlis/complaintlis.component';
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import {JobComponent} from '../../job/job.component';
     QrcodeEventComponent,
     MapsComponent,
     JobComponent,
-    UploadmoneyComponent
+    UploadmoneyComponent,
+    ComplaintlisComponent
   ]
 })
 

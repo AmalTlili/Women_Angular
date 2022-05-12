@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Route } from '@angular/router';
 import { ComplaintService } from 'app/complaint.service';
 import { Complaint } from 'app/modals/Complaint';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-icons',
@@ -10,9 +12,10 @@ import { Complaint } from 'app/modals/Complaint';
 export class IconsComponent implements OnInit {
 
   complaint:Complaint= new Complaint;
+  router: Router;
 
 
-  constructor(private complaitservice : ComplaintService) { }
+  constructor(private complaitservice : ComplaintService, public route :Router) { }
 
   ngOnInit() {
   }
@@ -20,6 +23,7 @@ export class IconsComponent implements OnInit {
 
   ajoutercomplaint(){
     this.complaitservice.addComplaint(this.complaint).subscribe(res=>{console.log(res); });
-console.log("complaint object",this.complaint)
+console.log("complaint object",this.complaint);
+this.route.navigate(["/listcomplaint"]);
   }
 }

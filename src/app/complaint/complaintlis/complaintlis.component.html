@@ -1,0 +1,111 @@
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<div class="container">
+<div class="row header" style="text-align:center;color:green">
+<h3>List of received Complaints :</h3>
+</div>
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of listcomplaints ">
+                <td>{{d.email}}</td>
+                <td><span>{{d.subject}}</span></td>
+               
+                <td>{{d.description}}</td>
+                <td> 
+                    <div class="page-content page-container" id="page-content">
+                        <div class="padding">
+                            <div class="row container d-flex justify-content-center">
+                                <div class="col-sm-6">
+
+                                    
+                         <button   (click)="editcomp(d.id,d)"type="button" class="btn btn-primary btn-rounded btn-icon">
+                            <i class="fa fa-pencil-square-o"></i>
+                         </button>
+                                </div>
+                                <button (click)="supprimercontraint(d.id)" type="button" class="btn btn-danger btn-rounded btn-icon">
+                                    <i class="fa fa-trash"></i>
+                                  </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+               
+            </tr>
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Description</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+
+
+    <div class="wrapper bg-white">
+        <form name="myform" #F="ngForm">
+            <div class="form-group border-bottom d-flex align-items-center justify-content-between flex-wrap">
+                <div class="label" id="Email">
+
+                   <h6> <label>Edit Complaint</label></h6>
+                </div>
+            </div>
+            <div class="form-group d-sm-flex margin">
+                <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative">
+                    <label>Email:</label>
+                    <input [(ngModel)]="comptoupdate.email" class="form-control" #t="ngModel" required minlength="8" type="email"  >
+
+                    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+                        <div *ngIf="t.errors.required">email is obligatory</div>
+                        <div *ngIf="t.errors.minlength">email is too short</div>
+                        <div *ngIf="t.errors.type">email is invalid</div>
+
+
+
+
+                    </div>
+                    <div class="label" id="Email"></div>
+                    <span class="fas fa-dot-circle text-muted"></span>
+                </div>
+                <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative">
+                    <label>Subject:</label>
+
+                    <input [(ngModel)]="comptoupdate.subject" class="form-control" required type="text" required >
+                    <div class="label" id="Subject"></div>
+                </div>
+            </div>
+            <div class="form-group d-sm-flex margin">
+                
+               
+            </div>
+            <div class="form-group border-bottom d-flex align-items-center position-relative">
+                <label>Description:</label>
+
+                <input [(ngModel)]="comptoupdate.description"  class="form-control" requiredtype="text" required>
+                <div class="label" id="Description"></div>
+
+            </div>
+            <div class="form-group my-3">
+                <div class="btn btn-primary rounded-0 d-flex justify-content-center text-center p-3" (click)="edit(comptoupdate.id,comptoupdate)"> Confirm modification
+                </div>
+            </div>
+        </form>
+
+    </div>

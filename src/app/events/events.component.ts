@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventService } from 'app/event.service';
 import { Events } from 'app/modals/events';
+import jspdf, { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas'
 
 @Component({
   selector: 'app-events',
@@ -11,6 +13,8 @@ import { Events } from 'app/modals/events';
 })
 export class EventsComponent implements OnInit {
   ableToAddEvent: boolean = false;
+  @ViewChild('content') content:ElementRef;  
+
   events: Events;
   events_tmp: Events;
   list : Events[];
@@ -30,7 +34,7 @@ export class EventsComponent implements OnInit {
   }
   receiver(receivedFromChild:string){
     console.log("from events "+ receivedFromChild)
-    if(receivedFromChild.endsWith("esprit.tn")){
+    if(receivedFromChild.endsWith("women.com")){
       this.ableToAddEvent = true;
     }else{
       this.ableToAddEvent = false;
@@ -115,11 +119,11 @@ private getDismissReason(reason: any): string {
 
    deleteEvent(id){
      console.log(id);
-  //   let conf=confirm("etes_vous sur ?");
-  //   if (conf)
+    // let conf=confirm("etes_vous sur ?");
+    // if (conf)
       this.es.deleteEvent(id).subscribe(()=>{
         console.log("MoneyPot supprimé");
-    //    window.location.reload();
+      //  window.location.reload();
     this.getEventList()
       });
       }
@@ -149,6 +153,22 @@ private getDismissReason(reason: any): string {
       sort(key){
       this.key= key;
       this.reverse = !this.reverse;
+      }
+
+
+     
+
+
+      export_to_pdf(){
+        const source = document.getElementById("content");
+        html2canvas(source).then((canvas) => {
+          console.log(canvas)
+          var imgData = canvas.toDataURL('image/png')
+          var doc = new jspdf()
+          var imgHeight = canvas.height * 208 / canvas.width;
+          doc.addImage(imgData, 0, 0, 208, imgHeight)
+          doc.save("export.pdf")
+        })       
       }
     }  
 

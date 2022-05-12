@@ -30,32 +30,33 @@
                         <div class="border" [hidden]="!ableToAddEvent">
                             <button class="btn btn-md btn-outline-primary" (click)="open(new)" >
                               <i class="fa fa-user ml-2"></i>New Event</button>
-                          </div>
-                          <div class="border">
+                              </div>
+
                            <button class="btn btn-md btn-outline-primary" [routerLink]="['/calendar']">
-                             <i class="fa fa-user ml-2"></i>Calendar</button>
-                         </div>
-                         <div class="border">
-                         <button mat-fab color="primary" type="button" (click)="showqr1()"
-                         aria-label="Example icon button with a delete icon">
-                         <mat-icon>qr_code</mat-icon>
+                             <i  class="fa fa-user ml-2"></i>Calendar</button>
+                             <button class="btn btn-md btn-outline-primary" (click)="export_to_pdf()" >
+                              <i class="fa-file-pdf-o ml-2"></i>Export to PDF</button>
+                           <button class="btn btn-md btn-outline-primary" (click)="showqr1()" >
+                           <i class="fa-solid fa-qrcode ml-2"></i>qr Code</button>
+                           
+
                          <div class="container" [hidden]="show_qr_code">
                             <app-qrcode-event (sender)="receiver($event)"></app-qrcode-event>
                          </div>
-                       </button></div>
+                     </div>
                         <div class="table-responsive">
-                            <table class="table table-striped" id="table">
+                            <table class="table table-striped" id="content" #content>
                                 <thead class=" text-primary">
                                   
-                                     <th (click)="sort('numberParticipant')">numberParticipant &nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('email')"> email&nbsp;<i class="fa fa-sort"></i></th>   
+                                     <th (click)="sort('numberParticipant')">Number de Participant &nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('email')"> Email&nbsp;<i class="fa fa-sort"></i></th>   
                                       
-                                     <th (click)="sort(' startDate')"> startDate&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('endDate')"> endDate&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort(' startDate')"> Start Date&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('endDate')"> End Date&nbsp;<i class="fa fa-sort"></i></th>
                                      <th (click)="sort('location')"> Location&nbsp;<i class="fa fa-sort"></i></th>
-                                     <th (click)="sort('topic')">  topic&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('topic')">  Topic&nbsp;<i class="fa fa-sort"></i></th>
                                      
-                                     <th (click)="sort('id')"> id&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('id')"> Id&nbsp;<i class="fa fa-sort"></i></th>
                                     
                                         
                                 
@@ -64,7 +65,7 @@
                                 </thead>
                                 <tbody> 
                                    
-                                     <tr *ngFor="let u of filtered_list | orderBy: key: reverse | paginate: {itemsPerPage:2,currentPage:page};" >
+                                     <tr *ngFor="let u of filtered_list | orderBy: key: reverse | paginate: {itemsPerPage:5,currentPage:page};" >
                                        
                                        
                                         <td>{{u.numberParticipant}}</td>
@@ -91,11 +92,12 @@
                                               <i class="fa fa-remove"></i>Delete</button>
                                           </td>
                                     </tr>
-                                    <pagination-controls (pageChange)=" page = $event"></pagination-controls> 
                                 </tbody>
                             </table>
-                        
-                 
+                        <div class="container">
+                           <pagination-controls (pageChange)=" page = $event"></pagination-controls> 
+                        </div>
+
                         </div>
                     </div>
                     <!-- <pagination-controls (pageChange)="page =$event"></pagination-controls> -->
@@ -117,32 +119,32 @@
                                 <label class="col-sm-2 control-label text-nowrap"
                                    for="numberParticipant">Numbre_Participant:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" ngModel id="numberParticipant" name="numberParticipant"/>
+                                   <input required type="text" class="form-control" ngModel id="numberParticipant" name="numberParticipant"/>
                                 </div>
                                 <label class="col-sm-2 control-label text-nowrap"
                                    for="email">Email:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" ngModel id="email" name="email"/>
+                                   <input  required minlength="4" type="text" class="form-control" ngModel id="email" name="email"/>
                                 </div>
                                 <label class="col-sm-2 control-label text-nowrap"
                                    for="startDate">Start_Date:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" ngModel id="startDate" name="startDate"/>
+                                   <input required type="text" class="form-control" ngModel id="startDate" name="startDate"/>
                                 </div>
                                 <label class="col-sm-2 control-label text-nowrap"
                                    for="endDate">End_Date:</label>
                                 <div class="col-sm-10">
-                                   <input type="text" class="form-control" ngModel id="endDate" name="endDate"/>
+                                   <input required type="text" class="form-control" ngModel id="endDate" name="endDate"/>
                                 </div>
                                 <label class="col-sm-2 control-label text-nowrap"
                                 for="location">location:</label>
                              <div class="col-sm-10">
-                                <input type="text" class="form-control" ngModel id="location" name="location"/>
+                                <input required type="text" class="form-control" ngModel id="location" name="location"/>
                              </div>
                              <label class="col-sm-2 control-label text-nowrap"
                              for="topic">Topic:</label>
                           <div class="col-sm-10">
-                             <input type="text" class="form-control" ngModel id="topic" name="topic"/>
+                             <input required type="text" class="form-control" ngModel id="topic" name="topic"/>
                           </div>
                                 
                       
@@ -218,8 +220,9 @@
                       </form>
                     </div>
                    
-                  </ng-template>   
-
+                  </ng-template>  
+                  
+                  
                 </div>
  
  

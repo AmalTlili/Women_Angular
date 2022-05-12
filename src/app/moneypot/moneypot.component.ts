@@ -12,6 +12,7 @@ import { content } from 'googleapis/build/src/apis/content';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { event } from 'jquery';
+// import swal from 'sweetalert';
 
 
 @Component({
@@ -38,6 +39,9 @@ export class MoneypotComponent implements OnInit {
     this.getMoneyPotList()
 
   }
+
+
+
 getMoneyPotList(){
   this.ms.getMoneyPotList().subscribe(res=>{
   this.list=res;
@@ -98,7 +102,10 @@ private getDismissReason(reason: any): string {
 
   updateMoneyPot(moneypot){
     this.ms.updateMoneyPot(moneypot).subscribe(data=>{
-      console.log("result is " + data);
+      console.log(moneypot);
+      
+      console.log("result is ")
+      console.log(data)
       
       this.getMoneyPotList();
     });
@@ -118,7 +125,37 @@ private getDismissReason(reason: any): string {
       }
 
 
-    
+  // openSweetalert(idM:number){
+  //   swal({
+  //        title: "vous êtes sûr ?",
+  //        text: "Une fois supprimée , Vous ne pouvez pas recuperer le Stock!",
+  //        icon: "warning",
+  //        buttons: ["annuler", "Confirmer"],
+  //        dangerMode: true,
+  //       })
+  //         .then((willDelete) => {
+   
+  //          if (willDelete) {
+  //           this.ms.deleteMoneyPot(idM).subscribe();
+  //            //this.stocks.splice(j,1);
+  //            //window.location.reload();
+  //           swal("Le MoneyPot a été supprimé!", {
+  //               icon: "success", 
+              
+  //             }).then(function(isConfirm) {
+  //               if (isConfirm) {
+  //                 location.reload();
+  //               } 
+  //             //  timer: 999999999999999999999999999999999999999, 
+  //             });
+             
+  //           } else {
+  //            swal("MoneyPot!");
+  //           }
+           
+  //        });
+   
+  //     }
 
     
       Search(){

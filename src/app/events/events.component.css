@@ -4,3 +4,6 @@
   .my-pagination /deep/ .ngx-pagination .current {
     background: red;
   }
+  .ng-invalid.ng-touched {
+    border-color: red;
+  }

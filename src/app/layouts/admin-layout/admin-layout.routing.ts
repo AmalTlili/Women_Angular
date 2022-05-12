@@ -11,6 +11,7 @@ import { MoneypotComponent } from 'app/moneypot/moneypot.component';
 import { EventsComponent } from 'app/events/events.component';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { EventsCalendarComponent } from 'app/events-calendar/events-calendar.component';
+import { UploadmoneyComponent } from 'app/uploadmoney/uploadmoney.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -64,6 +65,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
+    { path: 'uploadmoney',    component: UploadmoneyComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
 ];

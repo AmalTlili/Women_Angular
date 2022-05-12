@@ -19,6 +19,9 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { EventChartsComponent } from './event-charts/event-charts.component';
 import { QrcodeEventComponent } from './qrcode-event/qrcode-event.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { UploadmoneyComponent } from './uploadmoney/uploadmoney.component';
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
@@ -26,6 +29,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 
 @NgModule({ 
   imports: [
+    BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -40,7 +44,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
+    AdminLayoutComponent,    
   ],
   bootstrap: [AppComponent]
 })

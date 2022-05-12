@@ -34,6 +34,10 @@ export class MoneypotService {
     return this._http.put(this.baseUrl + "modifyMoneyPot",moneypot);
   }
 
+  uploadMoneyPot(img:FormData):Observable<any>{
+    return this._http.post(this.baseUrl + "upload",img);
+  }
+
    addMoneyPot(moneypot):Observable<any>{
      return this._http.post(this.baseUrl + "AjouterM",moneypot);
    }

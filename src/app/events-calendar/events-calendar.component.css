@@ -9,3 +9,7 @@
 #navigation{
     display: none;
 }
+
+::ng-deep .fc-h-event .fc-event-title {
+    font: status-bar;
+}

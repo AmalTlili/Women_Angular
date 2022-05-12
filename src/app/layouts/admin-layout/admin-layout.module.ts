@@ -32,6 +32,10 @@ import { EventsCalendarComponent } from 'app/events-calendar/events-calendar.com
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrcodeEventComponent } from 'app/qrcode-event/qrcode-event.component';
 import {MatIconModule} from '@angular/material/icon';
+import{AngularFileUploaderModule} from 'angular-file-uploader';
+import { AgmCoreModule } from '@agm/core';
+import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
+import { UploadmoneyComponent } from 'app/uploadmoney/uploadmoney.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -42,6 +46,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   imports: [
     CommonModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCwMrp5MhS-JQ9f5v2P-s7K9L0dcIqWcrM',
+      libraries: ["places"]
+    }),
+    ReactiveFormsModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
@@ -56,8 +65,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     Ng2OrderModule,
     NgxPaginationModule,
     FullCalendarModule ,
-    ZXingScannerModule
+    ZXingScannerModule,
+    AngularFileUploaderModule,
+    MatGoogleMapsAutocompleteModule,
+    
   ],
+ // ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
@@ -70,8 +83,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EventsComponent,
     UserProfileComponent,
     EventsCalendarComponent,
-    QrcodeEventComponent
+    QrcodeEventComponent,
+    MapsComponent,
+    UploadmoneyComponent
   ]
 })
 
 export class AdminLayoutModule {}
+
+

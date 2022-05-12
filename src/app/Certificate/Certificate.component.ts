@@ -20,6 +20,7 @@ import {Certificate} from '../models/Certifficate.model';
 })
 export class CertificateComponent implements OnInit {
   Certificates: Certificate[] = [];
+  Trainings: Training[] = [];
   lentgh : any;
   closeResult: string;
   editForm: FormGroup;
@@ -165,6 +166,9 @@ export class CertificateComponent implements OnInit {
     this.lentgh = this.Certificates.length;
   }
   ngOnInit() {
+    this.TrainingService.getTrainings().subscribe(data =>{
+      this.Trainings = data;
+    });
     this.retrieveTrainings();
     this.editForm = this.fb.group({
       id: [''],
@@ -183,9 +187,10 @@ export class CertificateComponent implements OnInit {
       totalItems: this.lentgh
     };
   }
-
+  currentCertf: any;
   onChangeTraining($event: MatSelectChange) {
     console.log($event);
+    this.currentCertf = $event.value;
   }
   onChangeFormer($event: MatSelectChange) {
     console.log($event);
@@ -259,6 +264,9 @@ export class CertificateComponent implements OnInit {
     this.information = 'No code information detected. Zoom in on a QR code to scan.';
   }
 
+  generate() {
+    this.CertificateService.GenerateCertificateForUsers(this.currentCertf);
+  }
 }
 
 interface Transport {

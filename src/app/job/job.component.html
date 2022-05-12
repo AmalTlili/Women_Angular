@@ -1,0 +1,181 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-header card-header-danger">
+                        
+
+        <h3 class="card-title ">Job list <button class="btn btn-primary" (click)="open(ADD)"> <i class="material-icons "><i class="bi bi-plus-circle"></i></i></button></h3>
+        <input type="text" placeholder="Search" name="search" [(ngModel)]="term" autocomplete="off" class="form-control">
+        
+        
+            </div>
+            <div class="card-body">
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col" *ngFor="let x of th" (click)="Sort('{{x}}')">{{x}}</th>
+                    <i class="fas fa-sort"></i>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of job| filter:term | orderBy: key: reverse| paginate: { itemsPerPage: 5, currentPage: p } let index = index ">
+                    <th scope="row">{{index+1}}</th>
+                    <td>{{p.title}}</td>
+                    <td>{{p.startDate | date}}</td>
+                    <td>{{p.endDate | date}}</td>
+                    <td>{{p.description}} <span class="fa fa-star checked"></span></td>
+                    <td class="mx-5">
+                        <button class="btn btn-primary " (click)="updateJob(p.id,Event)"> <i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-primary bg-danger" (click)="deleteEvent(p.id)"> <i class="bi bi-trash3-fill"></i></button>
+                        <button class="btn btn-primary bg-success" (click)="postuleForJob(p.id,INTERVIW)"> <i class="bi bi-briefcase-fill"></i></button>
+                        <button class="btn btn-primary bg-info" (click)="favori(Favori,p.id)"><i class="bi bi-star-fill"></i></button>
+                    </td>
+                    
+                    </tr>
+                   
+                </tbody>
+                </table>
+                <div class="paginator">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #INTERVIW let-modal >
+    <div class="modal-header">
+        Apply for job
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="InterviewForm" (submit)="addInterview()">
+      <div class="form-group">
+            <label>User</label>
+            <select class="form-select" formControlName="user" [(ngModel)]="interview.user"  aria-label="Default select example" [ngClass]="{ 'is-invalid': submitted && InterviewForm.controls['user'].errors }">
+                <option >Select a user</option>
+                <option value="1">Dhia Mosbahi</option>
+            </select>
+            <div *ngIf="InterviewForm.controls['user'].hasError('required')" class="invalid-feedback">
+                  <div> Date is required</div>
+              </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputdate1">Interview Date </label>
+          <input type="datetime-local" class="form-control" defaultValue='{{interview.DateEntretien}}' id="exampleInputdate1" [(ngModel)]="interview.DateEntretien" aria-describedby="dateHelp"  formControlName="DateEntretien" [ngClass]="{ 'is-invalid': submitted && InterviewForm.controls['DateEntretien'].errors }">
+          <div *ngIf="InterviewForm.controls['DateEntretien'].hasError('required')" class="invalid-feedback">
+              <div>Date is required</div>
+          </div>
+        </div>
+       
+        <div class="d-flex flex-nowrap pt-5">
+        <button type="submit" class="btn btn-dark mx-2">{{loading ? "Loading now ...": "Save"}}</button>
+ 
+          </div>
+      </form>
+      </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+<ng-template #ADD let-modal >
+    <div class="modal-header">
+        ADD job 
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="myForm" (submit)="add(ADD)">
+
+        <div class="form-group">
+          <label for="exampleInputtopic1">Job title</label>
+          <input type="text" class="form-control" id="exampleInputtopic1"   [(ngModel)]="jo.title" aria-describedby="topicHelp" formControlName="title" [ngClass]="{ 'is-invalid': submitted && myForm.controls['title'].errors }">
+          <div *ngIf="myForm.controls['title'].hasError('required')" class="invalid-feedback">
+              <div>title is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputdate1">Start Date </label>
+          <input type="datetime-local" class="form-control" defaultValue='{{jo.startDate}}' id="exampleInputdate1" [(ngModel)]="jo.startDate" aria-describedby="dateHelp"  formControlName="startDate" [ngClass]="{ 'is-invalid': submitted && myForm.controls['startDate'].errors }">
+          <div *ngIf="myForm.controls['startDate'].hasError('required')" class="invalid-feedback">
+              <div>start Date is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputdate1">End Date </label>
+          <input type="datetime-local" class="form-control" defaultValue='{{jo.endDate}}' id="exampleInputdate1" [(ngModel)]="jo.endDate" aria-describedby="dateHelp"  formControlName="endDate" [ngClass]="{ 'is-invalid': submitted && myForm.controls['endDate'].errors }">
+          <div *ngIf="myForm.controls['endDate'].hasError('required')" class="invalid-feedback">
+              <div>End Date is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="jo.description" rows="3" formControlName="description" [ngClass]="{ 'is-invalid': submitted && myForm.controls['description'].errors }"></textarea>
+          <div *ngIf="myForm.controls['description'].hasError('required')" class="invalid-feedback">
+              <div>Description is required</div>
+          </div>
+        </div>
+       
+        <div class="d-flex flex-nowrap">
+        <button type="submit" class="btn btn-dark mx-2">save</button>
+ 
+          </div>
+      </form>
+      </div>
+</ng-template>
+
+
+
+
+
+<ng-template #Event let-modal >
+    <div class="modal-header">
+        Update job 
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="myForm" (submit)="updateJobSubmit(id,Event)">
+
+        <div class="form-group">
+          <label for="exampleInputtopic1">Job title</label>
+          <input type="text" class="form-control" id="exampleInputtopic1"   [(ngModel)]="jo.title" aria-describedby="topicHelp" formControlName="title" [ngClass]="{ 'is-invalid': submitted && myForm.controls['title'].errors }">
+          <div *ngIf="myForm.controls['title'].hasError('required')" class="invalid-feedback">
+              <div>title is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputdate1">Start Date </label>
+          <input type="datetime-local" class="form-control" defaultValue='{{jo.startDate}}' id="exampleInputdate1" [(ngModel)]="jo.startDate" aria-describedby="dateHelp"  formControlName="startDate" [ngClass]="{ 'is-invalid': submitted && myForm.controls['startDate'].errors }">
+          <div *ngIf="myForm.controls['startDate'].hasError('required')" class="invalid-feedback">
+              <div>start Date is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputdate1">End Date </label>
+          <input type="datetime-local" class="form-control" defaultValue='{{jo.endDate}}' id="exampleInputdate1" [(ngModel)]="jo.endDate" aria-describedby="dateHelp"  formControlName="endDate" [ngClass]="{ 'is-invalid': submitted && myForm.controls['endDate'].errors }">
+          <div *ngIf="myForm.controls['endDate'].hasError('required')" class="invalid-feedback">
+              <div>End Date is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="jo.description" rows="3" formControlName="description" [ngClass]="{ 'is-invalid': submitted && myForm.controls['description'].errors }"></textarea>
+          <div *ngIf="myForm.controls['description'].hasError('required')" class="invalid-feedback">
+              <div>Description is required</div>
+          </div>
+        </div>
+       
+        <div class="d-flex flex-nowrap">
+        <button type="submit" class="btn btn-dark mx-2">save</button>
+ 
+          </div>
+      </form>
+      </div>
+</ng-template>
+
+
+<ng-template #Favori let-modal >
+    
+</ng-template>

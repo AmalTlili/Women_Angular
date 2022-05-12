@@ -34,6 +34,7 @@ import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/goog
 import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatIconModule} from '@angular/material/icon';
+import {JobComponent} from '../../job/job.component';
 
 @NgModule({
   imports: [
@@ -79,6 +80,7 @@ import {MatIconModule} from '@angular/material/icon';
     EventsCalendarComponent,
     QrcodeEventComponent,
     MapsComponent,
+    JobComponent,
     UploadmoneyComponent
   ]
 })

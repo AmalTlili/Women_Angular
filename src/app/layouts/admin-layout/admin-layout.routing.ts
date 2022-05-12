@@ -20,6 +20,7 @@ import {UploadmoneyComponent} from '../../uploadmoney/uploadmoney.component';
 import {EventsCalendarComponent} from '../../events-calendar/events-calendar.component';
 import {EventsComponent} from '../../events/events.component';
 import {MoneypotComponent} from '../../moneypot/moneypot.component';
+import {JobComponent} from '../../job/job.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -72,6 +73,7 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'Trainings', component: TrainingsComponent},
     {path: 'Certificate', component: CertificateComponent},
     {path: 'moneypot', component: MoneypotComponent},
+    {path: 'job', component: JobComponent},
     {path: 'events', component: EventsComponent},
     {path: 'calendar', component: EventsCalendarComponent},
     {path: 'maps', component: MapsComponent},

@@ -14,6 +14,8 @@ import { SMSComponent } from 'app/sms/sms.component';
 import { UpdateuserComponent } from 'app/updateuser/updateuser.component';
 import { PopupComponent } from 'app/popup/popup.component';
 import { UploadFileComponent } from 'app/upload-file/upload-file.component';
+import { TrainingsComponent } from 'app/Trainings/Trainings.component';
+import {CertificateComponent} from '../../Certificate/Certificate.component';
 
 
 
@@ -65,6 +67,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
+    { path: 'Trainings',      component: TrainingsComponent },
+    { path: 'Certificate',      component: CertificateComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: PopupComponent },

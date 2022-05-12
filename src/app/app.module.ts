@@ -61,7 +61,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppRoutingModule,
     FullCalendarModule,
     ModalModule.forRoot(), ProgressBarModule,
-    Ng2SearchPipeModule,QRCodeModule,
+    Ng2SearchPipeModule, QRCodeModule,
     SocialLoginModule
     
    

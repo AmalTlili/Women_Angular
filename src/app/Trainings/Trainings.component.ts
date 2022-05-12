@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {HttpClient, HttpEventType, HttpResponse} from '@angular/common/http';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
@@ -9,12 +9,14 @@ import {MatSelectChange} from '@angular/material/select';
 import {UploadFileService} from '../services/upload-files.service';
 import {TrainingServiceService} from '../services/training-service.service';
 import {Training} from '../models/Training.model';
+import {QRCode} from '../models/QRCode.model';
+import {CertificateServiceService} from '../services/certificate-service.service';
 @Component({
   selector: 'app-typography',
-  templateUrl: './typography.component.html',
-  styleUrls: ['./typography.component.css']
+  templateUrl: './Trainings.component.html',
+  styleUrls: ['./Trainings.component.css']
 })
-export class TypographyComponent implements OnInit {
+export class TrainingsComponent implements OnInit {
   Trainings: Training[] = [];
   lentgh : any;
   closeResult: string;
@@ -34,13 +36,17 @@ export class TypographyComponent implements OnInit {
   errorMsg = '';
   config: any;
   uploadCertificateToThis: any;
+  scannerEnabled = true;
+  transports: Transport[] = [];
+  information = 'No code information detected. Zoom in on a QR code to scan.';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private router: any;
   // tslint:disable-next-line:max-line-length
   searchText: any;
   // tslint:disable-next-line:max-line-length
-  constructor( private TrainingService: TrainingServiceService, private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder, private uploadService: UploadFileService
+  constructor( private CertificateService: CertificateServiceService, private cd: ChangeDetectorRef, private TrainingService: TrainingServiceService, private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder, private uploadService: UploadFileService
   ) {
     // this.lentgh = 0;
     // this.config = {
@@ -230,4 +236,43 @@ export class TypographyComponent implements OnInit {
     this.uploadCertificateToThis = $event.value;
   }
 
+    Join(training: any) {
+      this.TrainingService.assignUserToTrainer(1, training.id).subscribe((result) => {
+        this.router.navigate(['/Trainings']);}
+        );
+    }
+
+
+  public scanSuccessHandler($event: any) {
+    this.scannerEnabled = false;
+    this.information = 'Wait retrieving information...';
+
+    const appointment = new QRCode($event);
+    this.CertificateService.VerifyCertificate(appointment.identifier).subscribe(
+        data => {
+          console.log(data);
+          this.information = data;
+          this.cd.markForCheck();
+        },
+        (error: any) => {
+          this.information = 'An error has occurred please try again...';
+          this.cd.markForCheck();
+        });
+  }
+
+  public enableScanner() {
+    this.scannerEnabled = !this.scannerEnabled;
+    this.information = 'No code information detected. Zoom in on a QR code to scan.';
+  }
+
+}
+
+interface Transport {
+  plates: string;
+  slot: Slot;
+}
+
+interface Slot {
+  name: string;
+  description: string;
 }

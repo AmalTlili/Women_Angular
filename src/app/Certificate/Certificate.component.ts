@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {HttpClient, HttpEventType, HttpResponse} from '@angular/common/http';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
@@ -9,19 +9,22 @@ import {MatSelectChange} from '@angular/material/select';
 import {UploadFileService} from '../services/upload-files.service';
 import {TrainingServiceService} from '../services/training-service.service';
 import {Training} from '../models/Training.model';
+import {QRCode} from '../models/QRCode.model';
+import {CertificateServiceService} from '../services/certificate-service.service';
+import {Certificate} from '../models/Certifficate.model';
 @Component({
   selector: 'app-typography',
-  templateUrl: './typography.component.html',
-  styleUrls: ['./typography.component.css']
+  templateUrl: './Certificate.component.html',
+  styleUrls: ['./Certificate.component.css']
 })
-export class TypographyComponent implements OnInit {
-  Trainings: Training[] = [];
+export class CertificateComponent implements OnInit {
+  Certificates: Certificate[] = [];
   lentgh : any;
   closeResult: string;
   editForm: FormGroup;
   displayedColumns: string[] = ['id', 'Tile', 'Description', 'Stars', 'Start date', 'End date', 'Availablity'];
-  dataSource: MatTableDataSource<Training>;
-  currentTutorial?: Training;
+  dataSource: MatTableDataSource<Certificate>;
+  currentTutorial?: Certificate;
   currentIndex = -1;
   title = '';
   page = 1;
@@ -34,13 +37,17 @@ export class TypographyComponent implements OnInit {
   errorMsg = '';
   config: any;
   uploadCertificateToThis: any;
+  scannerEnabled = true;
+  transports: Transport[] = [];
+  information = 'No code information detected. Zoom in on a QR code to scan.';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private router: any;
   // tslint:disable-next-line:max-line-length
   searchText: any;
   // tslint:disable-next-line:max-line-length
-  constructor( private TrainingService: TrainingServiceService, private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder, private uploadService: UploadFileService
+  constructor( private CertificateService: CertificateServiceService, private cd: ChangeDetectorRef, private TrainingService: TrainingServiceService, private httpClient: HttpClient, private modalService: NgbModal, private fb: FormBuilder, private uploadService: UploadFileService
   ) {
     // this.lentgh = 0;
     // this.config = {
@@ -84,42 +91,37 @@ export class TypographyComponent implements OnInit {
     }
   }
   onSubmit(f: NgForm) {
-    f.value.startDate =
+    f.value.date =
         new Date(
-            f.value.startDate.year,
-            f.value.startDate.month,
-            f.value.startDate.day);
-    f.value.endDate =
-        new Date(
-            f.value.endDate.year,
-            f.value.endDate.month,
-            f.value.endDate.day);
+            f.value.date.year,
+            f.value.date.month,
+            f.value.date.day);
     console.log(f.value);
-    this.TrainingService.create(f.value).subscribe((result) => {
+    this.CertificateService.create(f.value).subscribe((result) => {
             console.log(result);
             this.ngOnInit();
           })
     this.modalService.dismissAll();
   }
-  openDetails(targetModal, training: Training) {
+  openDetails(targetModal, certificate: Certificate) {
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
       size: 'lg'
     });
-    document.getElementById('domain1').setAttribute('value', training.domain);
-    document.getElementById('title1').setAttribute('value', training.title);
-    document.getElementById('description1').setAttribute('value', training.description);
+    document.getElementById('firstName1').setAttribute('value', certificate.firstName);
+    document.getElementById('title1').setAttribute('value', certificate.title);
+    document.getElementById('lastName1').setAttribute('value', certificate.lastName);
     // document.getElementById('email2').setAttribute('value', String(training.stars));
-    document.getElementById('startDate1').setAttribute('value', String( training.startDate));
-    document.getElementById('endDate1').setAttribute('value',  String(training.endDate));
-    document.getElementById('availablity1').setAttribute('value', training.availablity);
+    document.getElementById('trainerName1').setAttribute('value', String( certificate.trainerName));
+    document.getElementById('date1').setAttribute('value',  String(certificate.date));
+    document.getElementById('adress1').setAttribute('value', certificate.adress);
 
   }
-  Delete(targetModal, training: Training) {
+  Delete(targetModal, certificate: Certificate) {
     // this.httpClient.delete('http://localhost:8081/women/Training/remove/' + training.id).subscribe((result) => {
     //   console.log(result); });
-    this.TrainingService.delete(training.id)
+    this.CertificateService.delete(certificate.id)
         .subscribe(
             response => {
               console.log(response);
@@ -128,46 +130,51 @@ export class TypographyComponent implements OnInit {
             error => {
               console.log(error);
             });
-    const index: number = this.Trainings.indexOf(training);
+    const index: number = this.Certificates.indexOf(certificate);
     if (index !== -1) {
-      this.Trainings.splice(index, 1);
+      this.Certificates.splice(index, 1);
     }
   }
-  openEdit(targetModal, training: Training) {
+  openEdit(targetModal, certificate: Certificate) {
     this.modalService.open(targetModal, {
       backdrop: 'static',
       size: 'lg'
     });
     this.editForm.patchValue( {
-      domain: training.domain,
-      title: training.title,
-      description: training.description,
-      startDate: training.startDate,
-      endDate: training.endDate,
-      availablity : training.availablity
+      trainerName: certificate.trainerName,
+      title: certificate.title,
+      firstName: certificate.firstName,
+      qrCode: certificate.qrCode,
+      adress: certificate.adress,
+      date : certificate.date,
+      level: certificate.level,
+      lastName: certificate.lastName
     });
   }
   retrieveTrainings(): void {
-    this.TrainingService.getTrainings()
+    this.CertificateService.getAll()
         .subscribe(
             data => {
-              this.Trainings = data;
+              this.Certificates = data;
               console.log(data);
             },
             error => {
               console.log(error);
             });
-    this.lentgh = this.Trainings.length;
+    this.lentgh = this.Certificates.length;
   }
   ngOnInit() {
     this.retrieveTrainings();
     this.editForm = this.fb.group({
       id: [''],
-      firstname: [''],
-      lastname: [''],
-      department: [''],
-      email: [''],
-      country: ['']
+      title: [''],
+      firstName: [''],
+      lastName: [''],
+      trainerName: [''],
+      date: [''],
+      adress: [''],
+      qrCode: [''],
+      level: [''],
     } );
     this.config = {
       itemsPerPage: 5,
@@ -226,8 +233,39 @@ export class TypographyComponent implements OnInit {
       this.config.currentPage = $event;
   }
 
-  onChangeTrainingForCertificate($event: MatSelectChange) {
-    this.uploadCertificateToThis = $event.value;
+
+
+
+  public scanSuccessHandler($event: any) {
+    this.scannerEnabled = false;
+    this.information = 'Wait retrieving information...';
+
+    const appointment = new QRCode($event);
+    this.CertificateService.VerifyCertificate(appointment.identifier).subscribe(
+        data => {
+          console.log(data);
+          this.information = data;
+          this.cd.markForCheck();
+        },
+        (error: any) => {
+          this.information = 'An error has occurred please try again...';
+          this.cd.markForCheck();
+        });
   }
 
+  public enableScanner() {
+    this.scannerEnabled = !this.scannerEnabled;
+    this.information = 'No code information detected. Zoom in on a QR code to scan.';
+  }
+
+}
+
+interface Transport {
+  plates: string;
+  slot: Slot;
+}
+
+interface Slot {
+  name: string;
+  description: string;
 }

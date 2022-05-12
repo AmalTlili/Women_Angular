@@ -17,6 +17,10 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {CertificateComponent} from '../../Certificate/Certificate.component';
+import {TrainingsComponent} from '../../Trainings/Trainings.component';
 
 @NgModule({
   imports: [
@@ -30,6 +34,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     DashboardComponent,
@@ -40,6 +46,8 @@ import {MatSelectModule} from '@angular/material/select';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+      CertificateComponent,
+      TrainingsComponent
   ]
 })
 

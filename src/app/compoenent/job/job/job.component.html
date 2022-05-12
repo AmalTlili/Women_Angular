@@ -13,16 +13,12 @@
                 <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Start date</th>
-                    <th scope="col">End date</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">#</th>
+                    <th scope="col" *ngFor="let x of th" (click)="Sort('{{x}}')">{{x}}</th>
+                    <i class="fas fa-sort"></i>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let p of job| filter:term | paginate: { itemsPerPage: 5, currentPage: p } let index = index ">
+                    <tr *ngFor="let p of job| filter:term | orderBy: key: reverse| paginate: { itemsPerPage: 5, currentPage: p } let index = index ">
                     <th scope="row">{{index+1}}</th>
                     <td>{{p.title}}</td>
                     <td>{{p.startDate | date}}</td>
@@ -32,7 +28,7 @@
                         <button class="btn btn-primary " (click)="updateJob(p.id,Event)"> <i class="bi bi-pencil-square"></i></button>
                         <button class="btn btn-primary bg-danger" (click)="deleteEvent(p.id)"> <i class="bi bi-trash3-fill"></i></button>
                         <button class="btn btn-primary bg-success" (click)="postuleForJob(p.id,INTERVIW)"> <i class="bi bi-briefcase-fill"></i></button>
-
+                        <button class="btn btn-primary bg-info" (click)="favori(Favori,p.id)"><i class="bi bi-star-fill"></i></button>
                     </td>
                     
                     </tr>
@@ -177,4 +173,9 @@
           </div>
       </form>
       </div>
+</ng-template>
+
+
+<ng-template #Favori let-modal >
+    
 </ng-template>

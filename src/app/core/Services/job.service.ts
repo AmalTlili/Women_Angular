@@ -4,6 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient,HttpErrorResponse,HttpEvent,HttpHeaders,HttpParams,HttpRequest   } from '@angular/common/http';
 import { Job } from '../Model/Job';
+import { JobFavori } from '../Model/JobFavori';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class JobService {
 
   updateJob(id:number,data:Job){
     return this.http.put(this.url+"job/update/"+id,data)
+  }
+
+  getJobFavoriById(idjob:number){
+    return this.http.get<JobFavori[]>(this.url+"job/favori/"+idjob)
   }
 
 

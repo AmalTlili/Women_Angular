@@ -13,6 +13,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ModalModule } from 'ngb-modal';
 import { ToastrModule } from 'ngx-toastr';
+import { OrderModule } from 'ngx-order-pipe';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { ToastrModule } from 'ngx-toastr';
     NgxPaginationModule,
     Ng2SearchPipeModule,
     ModalModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(),OrderModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

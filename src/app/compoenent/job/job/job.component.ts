@@ -8,13 +8,17 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Interview } from 'src/app/Core/Model/Interview';
 import { InterviewService } from 'src/app/Core/Services/interview.service';
-import { finalize } from 'rxjs';
+import { finalize } from 'rxjs';  
+
+
 @Component({
   selector: 'app-job',
   templateUrl: './job.component.html',
   styleUrls: ['./job.component.css']
 })
 export class JobComponent implements OnInit {
+
+  th=['#','Title','Start Date ','End Date','Description']
   job:Job[]
   jo:Job
   interview:Interview
@@ -27,6 +31,8 @@ export class JobComponent implements OnInit {
   id:number
   idJob:number;
   loading:boolean=false;
+  reverse: boolean = false;
+  key='';
   constructor(private interviewService:InterviewService, private jobService:JobService,private modalService: NgbModal,private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -47,6 +53,32 @@ export class JobComponent implements OnInit {
 
     })
     
+  }
+  Sort(key: any) {
+    this.key = key;
+    this.reverse = !this.reverse
+  
+  }
+
+  favori(content:any,idJob:number){
+    this.jobService.getJobFavoriById(idJob).subscribe((res)=>{
+      console.log(res)
+      if(res==null){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'This job is already a favor !'
+        })
+      }else{
+        Swal.fire(
+          'Good job!',
+          'Your job is marked as favor!',
+          'success'
+        )
+      }
+    })
+    
+
   }
   deleteEvent(id:number){
     Swal.fire({

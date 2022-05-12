@@ -9,7 +9,6 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import {TrainingsComponent} from '../../Trainings/Trainings.component';
-import {CertificateComponent} from '../../Certificate/Certificate.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -59,7 +58,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'Trainings',      component: TrainingsComponent },
-    { path: 'Certificate',      component: CertificateComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },

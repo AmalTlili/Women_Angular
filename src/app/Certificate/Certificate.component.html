@@ -62,23 +62,7 @@
         <div *ngIf="message" class="alert alert-success" role="alert">{{ message }}</div>
         <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{ errorMsg }}</div>
     </div>
-      <div class="card">
-          <div class="card-header card-header-danger" >
-              <h4 class="card-title">Assign</h4>
-              <p class="card-category">Assign a trainer to training</p>
-          </div>
-          <div style="margin: 5%;">
-              <mat-form-field appearance="fill">
-                  <mat-label>Trainings</mat-label>
-                  <mat-select (selectionChange)="onChangeTraining($event)" >
-                      <mat-option  *ngFor="let sec of Trainings; let i = index" [value]="Trainings[i].id">
-                          {{Trainings[i].title}}</mat-option>
-                  </mat-select>
-              </mat-form-field>
-              <button class="btn btn-sm btn-info" (click)="generate()">
-                  <i class="fa fa-search"></i>Give Certificate to all users</button>
-          </div>
-      </div>
+
       <div class="row">
           <div class="col-12 col-lg-6">
               <div class="kt-portlet kt-portlet--tab">

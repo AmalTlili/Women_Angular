@@ -36,6 +36,8 @@ import { PopupComponent } from './popup/popup.component';
 import { QRCodeModule } from 'angular2-qrcode';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { BubblechartComponent } from './bubblechart/bubblechart.component';
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -62,6 +64,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     ModalModule.forRoot(), ProgressBarModule,
     Ng2SearchPipeModule, QRCodeModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
     SocialLoginModule
     
    

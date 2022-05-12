@@ -1,0 +1,7 @@
+::ng-deep .navbar-brand, #navbarDropdownMenuLink{
+    display: none;
+}
+.container{
+    margin: 5%;
+}
+    

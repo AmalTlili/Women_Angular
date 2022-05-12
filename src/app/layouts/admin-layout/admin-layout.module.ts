@@ -21,11 +21,28 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {CertificateComponent} from '../../Certificate/Certificate.component';
 import {TrainingsComponent} from '../../Trainings/Trainings.component';
+import {MoneypotComponent} from '../../moneypot/moneypot.component';
+import {EventsCalendarComponent} from '../../events-calendar/events-calendar.component';
+import {QrcodeEventComponent} from '../../qrcode-event/qrcode-event.component';
+import {UploadmoneyComponent} from '../../uploadmoney/uploadmoney.component';
+import {EventsComponent} from '../../events/events.component';
+import {AgmCoreModule} from '@agm/core';
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import {FullCalendarModule} from '@fullcalendar/angular';
+import {ZXingScannerModule} from '@zxing/ngx-scanner';
+import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
+import {AngularFileUploaderModule} from 'angular-file-uploader';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCwMrp5MhS-JQ9f5v2P-s7K9L0dcIqWcrM',
+      libraries: ['places']
+    }),
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -36,6 +53,14 @@ import {TrainingsComponent} from '../../Trainings/Trainings.component';
     MatTooltipModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
+    NgbModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
+    FullCalendarModule,
+    ZXingScannerModule,
+    AngularFileUploaderModule,
+    MatGoogleMapsAutocompleteModule,
+    MatIconModule,
   ],
   declarations: [
     DashboardComponent,
@@ -47,7 +72,14 @@ import {TrainingsComponent} from '../../Trainings/Trainings.component';
     NotificationsComponent,
     UpgradeComponent,
       CertificateComponent,
-      TrainingsComponent
+      TrainingsComponent,
+    MoneypotComponent,
+    EventsComponent,
+    UserProfileComponent,
+    EventsCalendarComponent,
+    QrcodeEventComponent,
+    MapsComponent,
+    UploadmoneyComponent
   ]
 })
 

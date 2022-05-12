@@ -1,0 +1,10 @@
+::ng-deep ngb-modal-backdrop {
+    z-index: 0 !important;
+  }
+  .my-pagination /deep/ .ngx-pagination .current {
+    background: red;
+  }
+  .ng-invalid.ng-touched {
+    border-color: red;
+  }
+

@@ -1,0 +1,228 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Event</h4>
+                        <p class="card-category">liste des Event</p>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                   
+              
+                        <div class="input-group">
+                            <input type="text" class="form-control" style="width: 50px!important;" placeholder="    Rechercher..." name="location" [(ngModel)] = "location" (ngModelChange)="Search()" >
+                            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                <i class="material-icons">search</i>
+                                <div class="ripple-container"></div>
+    
+                              
+    
+                            </button>
+                        <!-- <button type="button" class=" btn  btn-sm btn-success"  [routerLink]="['/facture/addfacture']"> <i class="fa fa-plus"></i>  Ajouter</button> <br> -->
+                    </div>
+                    <div class="card-body">
+
+                        <div class="border" [hidden]="!ableToAddEvent">
+                            <button class="btn btn-md btn-outline-primary" (click)="open(new)" >
+                              <i class="fa fa-user ml-2"></i>New Event</button>
+                              </div>
+
+                           <button class="btn btn-md btn-outline-primary" [routerLink]="['/calendar']">
+                             <i  class="fa fa-user ml-2"></i>Calendar</button>
+                             <button class="btn btn-md btn-outline-primary" (click)="export_to_pdf()" >
+                              <i class="fa-file-pdf-o ml-2"></i>Export to PDF</button>
+                           <button class="btn btn-md btn-outline-primary" (click)="showqr1()" >
+                           <i class="fa-solid fa-qrcode ml-2"></i>qr Code</button>
+                           
+
+                         <div class="container" [hidden]="show_qr_code">
+                            <app-qrcode-event (sender)="receiver($event)"></app-qrcode-event>
+                         </div>
+                     </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="content" #content>
+                                <thead class=" text-primary">
+                                  
+                                     <th (click)="sort('numberParticipant')">Number de Participant &nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('email')"> Email&nbsp;<i class="fa fa-sort"></i></th>   
+                                      
+                                     <th (click)="sort(' startDate')"> Start Date&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('endDate')"> End Date&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('location')"> Location&nbsp;<i class="fa fa-sort"></i></th>
+                                     <th (click)="sort('topic')">  Topic&nbsp;<i class="fa fa-sort"></i></th>
+                                     
+                                     <th (click)="sort('id')"> Id&nbsp;<i class="fa fa-sort"></i></th>
+                                    
+                                        
+                                
+                                  
+                                  
+                                </thead>
+                                <tbody> 
+                                   
+                                     <tr *ngFor="let u of filtered_list | orderBy: key: reverse | paginate: {itemsPerPage:5,currentPage:page};" >
+                                       
+                                       
+                                        <td>{{u.numberParticipant}}</td>
+                                        <td>{{u.email}}</td>
+                                         <td>{{u.startDate | date:'dd/MM/yyyy'}}</td>
+                                         <td>{{u.endDate | date:'dd/MM/yyyy'}}</td>
+                                         
+                                         <td>{{u.location}}</td> 
+                                         <td>{{u.topic}}</td>
+                                        <td>{{ u.id}}</td> 
+                                       
+                                           
+                                    
+                                         
+                                      
+                                        <!-- <button type="button" class="btn btn-outline-primary" (click)="openSweetalert(u.idM)">edit</button> -->
+                                         
+                                    
+                                        <td>
+                                        
+                                            <button class="btn btn-sm btn-warning"  (click)="open(edit,u)">
+                                              <i class="fa fa-edit"></i>Edit</button>
+                                            <button class="btn btn-sm btn-danger" (click)="deleteEvent(u.id)">
+                                              <i class="fa fa-remove"></i>Delete</button>
+                                          </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <div class="container">
+                           <pagination-controls (pageChange)=" page = $event"></pagination-controls> 
+                        </div>
+
+                        </div>
+                    </div>
+                    <!-- <pagination-controls (pageChange)="page =$event"></pagination-controls> -->
+                </div>
+               
+                
+                
+                     
+                <ng-template #new let-modal style="z-index: 0 !important;">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">New Event</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="numberParticipant">Numbre_Participant:</label>
+                                <div class="col-sm-10">
+                                   <input required type="text" class="form-control" ngModel id="numberParticipant" name="numberParticipant"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="email">Email:</label>
+                                <div class="col-sm-10">
+                                   <input  required minlength="4" type="text" class="form-control" ngModel id="email" name="email"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="startDate">Start_Date:</label>
+                                <div class="col-sm-10">
+                                   <input required type="text" class="form-control" ngModel id="startDate" name="startDate"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="endDate">End_Date:</label>
+                                <div class="col-sm-10">
+                                   <input required type="text" class="form-control" ngModel id="endDate" name="endDate"/>
+                                </div>
+                                <label class="col-sm-2 control-label text-nowrap"
+                                for="location">location:</label>
+                             <div class="col-sm-10">
+                                <input required type="text" class="form-control" ngModel id="location" name="location"/>
+                             </div>
+                             <label class="col-sm-2 control-label text-nowrap"
+                             for="topic">Topic:</label>
+                          <div class="col-sm-10">
+                             <input required type="text" class="form-control" ngModel id="topic" name="topic"/>
+                          </div>
+                                
+                      
+                    </div>
+                    <div class="border text-center">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
+
+                        </div>
+
+                    
+
+                      </form>
+                    </div>
+                   
+                  </ng-template>   
+
+                  <ng-template #edit let-modal style="z-index: 0 !important;">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Edit Event</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #fEdit="ngForm" (ngSubmit)="onSubmitEdit(fEdit)" novalidate>
+                            <div class="form-group">
+                                <div hidden>
+                                    <label class="col-sm-2 control-label text-nowrap"
+                                    for="id">id</label>
+                                 <div class="col-sm-10">
+                                    <input type="text" class="form-control"  id="id" [(ngModel)]="events.id" name="id" />
+                                 </div>
+                                </div>
+                              
+
+                                <label class="col-sm-2 control-label text-nowrap"
+                                   for="Numbre_Participant">Numbre_Participant:</label>
+                                <div class="col-sm-10">
+                                   <input type="text"  class="form-control" [(ngModel)]="events.numberParticipant" id="numberParticipant" name="numberParticipant"/>
+                                </div>
+                               
+                                <label class="col-sm-2 control-label text-nowrap" 
+                                for="Start_Date">Start_Date:</label>
+                             <div class="col-sm-duration">
+                                <input type="text" class="form-control" [(ngModel)]="events.startDate" id="startDate" name="startDate" />
+                             </div>
+                             <label class="col-sm-2 control-label text-nowrap"
+                             for="End_Date">End_Date</label>
+                          <div class="col-sm-10">
+                             <input type="text" class="form-control"  id="endDate" [(ngModel)]="events.endDate" name="endDate" />
+                          </div>
+                          <label class="col-sm-2 control-label text-nowrap"
+                          for="location">location</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control"  id="location" name="location" [(ngModel)]="events.location"/>
+                       </div>
+                       <label class="col-sm-2 control-label text-nowrap"
+                          for="Topic">Topic</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control"  id="topic" name="topic" [(ngModel)]="events.topic"/>
+                       </div>
+                      
+                    </div>
+                    <div class="border text-center">
+                        <button type="submit" class="btn btn-info">Save</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
+
+                        </div>
+
+                    
+
+                      </form>
+                    </div>
+                   
+                  </ng-template>  
+                  
+                  
+                </div>
+ 
+ 

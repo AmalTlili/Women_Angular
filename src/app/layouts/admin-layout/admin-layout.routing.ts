@@ -16,8 +16,10 @@ import { PopupComponent } from 'app/popup/popup.component';
 import { UploadFileComponent } from 'app/upload-file/upload-file.component';
 import { TrainingsComponent } from 'app/Trainings/Trainings.component';
 import {CertificateComponent} from '../../Certificate/Certificate.component';
-
-
+import {UploadmoneyComponent} from '../../uploadmoney/uploadmoney.component';
+import {EventsCalendarComponent} from '../../events-calendar/events-calendar.component';
+import {EventsComponent} from '../../events/events.component';
+import {MoneypotComponent} from '../../moneypot/moneypot.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -63,25 +65,25 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'table-list',     component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'Trainings',      component: TrainingsComponent },
-    { path: 'Certificate',      component: CertificateComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: PopupComponent },
-    { path: 'adduser',  component: AdduserComponent },
-    {path:'updateuser/:id',component:UpdateuserComponent},
-    {path:'sms',component:SMSComponent},
-    { path: 'upload', component: UploadFileComponent },
-  
-  
-    
-    
-    
-    
-    
-    
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'user-profile', component: UserProfileComponent},
+    {path: 'table-list', component: TableListComponent},
+    {path: 'typography', component: TypographyComponent},
+    {path: 'Trainings', component: TrainingsComponent},
+    {path: 'Certificate', component: CertificateComponent},
+    {path: 'moneypot', component: MoneypotComponent},
+    {path: 'events', component: EventsComponent},
+    {path: 'calendar', component: EventsCalendarComponent},
+    {path: 'maps', component: MapsComponent},
+    {path: 'uploadmoney', component: UploadmoneyComponent},
+    {path: 'icons', component: IconsComponent},
+    {path: 'maps', component: MapsComponent},
+    {path: 'notifications', component: PopupComponent},
+    {path: 'adduser', component: AdduserComponent},
+    {path: 'updateuser/:id', component: UpdateuserComponent},
+    {path: 'sms', component: SMSComponent},
+    {path: 'upload', component: UploadFileComponent},
+
+
 ];
+
